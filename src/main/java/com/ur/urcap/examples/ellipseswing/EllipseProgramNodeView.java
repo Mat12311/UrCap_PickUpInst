@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -32,6 +33,12 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 
 	private JButton P1;
 	private JButton P2;
+	private JButton P3;
+	
+	private JLabel LP1;
+	private JLabel LP2;
+	private JLabel LP3;
+	
 	private JTextField pickTextField = new JTextField("1");
 	private JTextField lenTextField = new JTextField("0");
 	private JTextField diamTextField = new JTextField("0");
@@ -39,6 +46,9 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 	private JSlider lenSlider = new JSlider();
 	private JSlider diamSlider = new JSlider();
 	private JLabel errorLabel;
+	public int p1=0; 
+	public int p2=0;
+	public int p3=0;
 
 	public EllipseProgramNodeView(Style style) {
 		this.style = style;
@@ -50,48 +60,81 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
 		Box infoSection = createSection(BoxLayout.PAGE_AXIS);
-		infoSection.add(createInfo("Pick Up Point Set"));
+		infoSection.add(createInfo("Pick Up Point Namber Set"));
 		panel.add(infoSection);
 		panel.add(createVerticalSpacing());
 		panel.add(createTextFieldButton(pickTextField, provider));
 		panel.add(createDescrption("Lenght"));
-		panel.add(createTextFieldSlider(lenTextField, lenSlider, 0, 50, provider));
+		panel.add(createTextFieldSlider(lenTextField, lenSlider, 0, 200, provider));
 		panel.add(createDescrption("Diameter"));
-		panel.add(createTextFieldSlider(diamTextField, diamSlider, 0, 50, provider));
-
-		Box buttonSection = createSection(BoxLayout.LINE_AXIS);
-		buttonSection.add(createHorizontalIndent());
-		this.P1 = createButton("P1");
+		panel.add(createTextFieldSlider(diamTextField, diamSlider, 0, 100, provider));
+		panel.add(createDescrption("Pick Up Point Set"));
+		
+		// create Button P 
+		final Box buttonSection1 = createSection(BoxLayout.LINE_AXIS);
+		buttonSection1.add(createHorizontalIndent());
+		this.P1 = createButton("P");
 		this.P1.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				provider.get().selectCenterPoint();
-
+				p1++;
+				
+				provider.get().selectPickUpPoint(p1);
+				buttonSection1.add(LP1=new JLabel("REDY"));
 			}
 		});
 		this.P1.setPreferredSize(style.getButtonSize());
 		this.P1.setMinimumSize(style.getButtonSize());
 		this.P1.setMaximumSize(style.getButtonSize());
-		buttonSection.add(this.P1, FlowLayout.LEFT);
-		panel.add(buttonSection);
+		buttonSection1.add(this.P1, FlowLayout.LEFT);
+		panel.add(buttonSection1);
 		panel.add(createVerticalSpacing());
-
-		buttonSection = createSection(BoxLayout.LINE_AXIS);
-		buttonSection.add(createHorizontalIndent());
-		this.P2 = createButton("P2");
+		
+		// create Button P1 
+		final Box buttonSection2 = createSection(BoxLayout.LINE_AXIS);
+		buttonSection2.add(createHorizontalIndent());
+		this.P2 = createButton("P1");
 		this.P2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				provider.get().moveRobot();
+				p2++;
+				if(p1>=2) p2=1;
+				provider.get().selectPickUpPoint(p2);
+				buttonSection2.add(LP2=new JLabel("REDY"));
 			}
 		});
 		this.P2.setPreferredSize(style.getButtonSize());
 		this.P2.setMinimumSize(style.getButtonSize());
 		this.P2.setMaximumSize(style.getButtonSize());
-		buttonSection.add(this.P2, FlowLayout.LEFT);
-		panel.add(buttonSection);
+		buttonSection2.add(this.P2, FlowLayout.LEFT);
+		panel.add(buttonSection2);
 		panel.add(createVerticalSpacing());
+		
+		// create Button P2 
+		final Box buttonSection3 = createSection(BoxLayout.LINE_AXIS);
+		buttonSection3.add(createHorizontalIndent());
+		this.P3 = createButton("P2");
+		this.P3.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				p3++;
+				
+				provider.get().selectPickUpPoint(p1);
+				LP3=new JLabel("REDY");
+				LP3.setBackground(Color.blue);
+				buttonSection3.add(LP3);
+			}
+		});
+		this.P3.setPreferredSize(style.getButtonSize());
+		this.P3.setMinimumSize(style.getButtonSize());
+		this.P3.setMaximumSize(style.getButtonSize());
+		buttonSection3.add(this.P3, FlowLayout.LEFT);
+		panel.add(buttonSection3);
+		panel.add(createVerticalSpacing());
+		
+		
 
 		Box errorSection = createSection(BoxLayout.LINE_AXIS);
 		errorSection.add(createHorizontalIndent());
@@ -124,6 +167,10 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 				int txt= Integer.parseInt(field.getText());
 				txt++;
 				if(txt==2) enableP2(true);
+				if(txt==3) enableP3(true);
+				if(txt>3) txt=3;
+				
+				
 				provider.get().onPickValueChange(txt);
 				field.setText(String.valueOf(txt));
 				
@@ -142,6 +189,7 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 				txt--;
 				if(txt<1) txt=1;
 				if(txt<2) enableP2(false);
+				if(txt<3) enableP3(false);
 				provider.get().onPickValueChange(txt);
 				field.setText(String.valueOf(txt));
 							
@@ -258,5 +306,9 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 
 	public void enableP2(boolean isEnabled) {
 		P2.setEnabled(isEnabled);
+	}
+	
+	public void enableP3(boolean isEnabled) {
+		P3.setEnabled(isEnabled);
 	}
 }

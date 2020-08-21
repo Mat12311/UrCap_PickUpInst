@@ -11,7 +11,11 @@ import com.ur.urcap.api.domain.program.ProgramModel;
 import com.ur.urcap.api.domain.program.nodes.ProgramNodeFactory;
 import com.ur.urcap.api.domain.program.nodes.builtin.MoveNode;
 import com.ur.urcap.api.domain.program.nodes.builtin.WaypointNode;
+import com.ur.urcap.api.domain.program.nodes.builtin.configurations.movenode.MoveNodeConfig;
+import com.ur.urcap.api.domain.program.nodes.builtin.configurations.movenode.MoveNodeConfigFactory;
 import com.ur.urcap.api.domain.program.nodes.builtin.configurations.movenode.TCPSelection;
+import com.ur.urcap.api.domain.program.nodes.builtin.configurations.movenode.TCPSelectionFactory;
+import com.ur.urcap.api.domain.program.nodes.builtin.configurations.movenode.builder.MoveNodeConfigBuilders;
 import com.ur.urcap.api.domain.program.nodes.builtin.configurations.movenode.builder.MovePConfigBuilder;
 import com.ur.urcap.api.domain.program.nodes.builtin.configurations.waypointnode.BlendParameters;
 import com.ur.urcap.api.domain.program.nodes.builtin.configurations.waypointnode.WaypointMotionParameters;
@@ -66,6 +70,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	private final UndoRedoManager undoRedoManager;
 
 	private MoveNode moveNode;
+
 	private final List<WaypointNode> waypointNodes = new ArrayList<WaypointNode>();
 
 	private DataModel dataModel;
@@ -76,6 +81,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	private final EllipseProgramNodeView view;
 	private final RobotMovement robotMovement;
 	private EllipseState ellipseState = new EllipseState();
+	private int n = 0;
 
 	public EllipseProgramNodeContribution(ProgramAPIProvider apiProvider, EllipseProgramNodeView view,
 										  DataModel model) {
@@ -140,6 +146,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	public void openView() {
 		view.updateError(this.ellipseState.getMessage(), this.ellipseState.isError());
 		view.enableP2(dataModel.get(PICKUP_POSITION, (Pose) null) != null);
+		view.enableP3(dataModel.get(PICKUP_POSITION, (Pose) null) != null);
 	}
 
 	@Override
@@ -166,13 +173,15 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		writer.appendLine("global P1 = "+dataModel.get(PICKUP_POSITION, 0)+"");
 	}
 
-	public void selectCenterPoint() {
+	public void selectPickUpPoint(final int n) {
 		clearErrors();
 		UserInterfaceAPI uiapi = apiProvider.getUserInterfaceAPI();
 		uiapi.getUserInteraction().getUserDefinedRobotPosition(new RobotPositionCallback2() {
 			@Override
 			public void onOk(PositionParameters positionParameters) {
-				removeNodes();
+				
+				
+				if(n>1) removeNodes();
 				createNodes();
 				configureMoveNode();
 				adjustWaypointsToCenterPoint(positionParameters);
@@ -335,8 +344,10 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 				.setBlend(blend, ErrorHandler.AUTO_CORRECT)
 				.setFeature(feature)
 				.setTCPSelection(tcpSelection);
+				
 
 		moveNode.setConfig(movePConfigBuilder.build());
+		
 	}
 
 	private void createAndAddWaypointNode(int waypointNumber) throws TreeStructureException {
