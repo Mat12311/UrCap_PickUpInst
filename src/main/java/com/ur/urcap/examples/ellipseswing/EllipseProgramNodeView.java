@@ -17,7 +17,6 @@ import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -35,9 +34,9 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 	private JButton P2;
 	private JButton P3;
 	
-	private JLabel LP1;
-	private JLabel LP2;
-	private JLabel LP3;
+	private JLabel LP1 = new JLabel("");
+	private JLabel LP2 = new JLabel("");
+	private JLabel LP3 = new JLabel("");
 	
 	private JTextField pickTextField = new JTextField("1");
 	private JTextField lenTextField = new JTextField("0");
@@ -46,6 +45,7 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 	private JSlider lenSlider = new JSlider();
 	private JSlider diamSlider = new JSlider();
 	private JLabel errorLabel;
+	
 	public int p1=0; 
 	public int p2=0;
 	public int p3=0;
@@ -81,13 +81,14 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 				p1++;
 				
 				provider.get().selectPickUpPoint(p1);
-				buttonSection1.add(LP1=new JLabel("REDY"));
+				LP1.setText("READY");;
 			}
 		});
 		this.P1.setPreferredSize(style.getButtonSize());
 		this.P1.setMinimumSize(style.getButtonSize());
 		this.P1.setMaximumSize(style.getButtonSize());
 		buttonSection1.add(this.P1, FlowLayout.LEFT);
+		buttonSection1.add(LP1);
 		panel.add(buttonSection1);
 		panel.add(createVerticalSpacing());
 		
@@ -99,15 +100,15 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				p2++;
-				if(p1>=2) p2=1;
 				provider.get().selectPickUpPoint(p2);
-				buttonSection2.add(LP2=new JLabel("REDY"));
+				LP2.setText("READY");
 			}
 		});
 		this.P2.setPreferredSize(style.getButtonSize());
 		this.P2.setMinimumSize(style.getButtonSize());
 		this.P2.setMaximumSize(style.getButtonSize());
 		buttonSection2.add(this.P2, FlowLayout.LEFT);
+		buttonSection2.add(LP2);
 		panel.add(buttonSection2);
 		panel.add(createVerticalSpacing());
 		
@@ -119,18 +120,17 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				p3++;
+				p3++;			
+				provider.get().selectPickUpPoint(p3);
+				LP3.setText("READY");
 				
-				provider.get().selectPickUpPoint(p1);
-				LP3=new JLabel("REDY");
-				LP3.setBackground(Color.blue);
-				buttonSection3.add(LP3);
 			}
 		});
 		this.P3.setPreferredSize(style.getButtonSize());
 		this.P3.setMinimumSize(style.getButtonSize());
 		this.P3.setMaximumSize(style.getButtonSize());
 		buttonSection3.add(this.P3, FlowLayout.LEFT);
+		buttonSection3.add(LP3);
 		panel.add(buttonSection3);
 		panel.add(createVerticalSpacing());
 		

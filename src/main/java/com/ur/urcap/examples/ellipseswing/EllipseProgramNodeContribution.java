@@ -72,6 +72,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	private MoveNode moveNode;
 
 	private final List<WaypointNode> waypointNodes = new ArrayList<WaypointNode>();
+	
 
 	private DataModel dataModel;
 	private TreeNode moveTreeNode;
@@ -170,7 +171,9 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		writer.appendLine("global Diam = "+getDiam()+"");
 		writer.appendLine("global Len = "+getLen()+"");
 		writer.appendLine("global Pick = "+getPick()+"");
-		writer.appendLine("global P1 = "+dataModel.get(PICKUP_POSITION, 0)+"");
+		//writer.appendLine("global P1 = "+dataModel.get(PICKUP_POSITION, 0)+"");
+		
+		
 	}
 
 	public void selectPickUpPoint(final int n) {
@@ -284,7 +287,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 			case 0:
 				 offsetX = 0;
 				 offsetY = 0;
-				 offsetZ = -1.5*len;
+				 offsetZ = 1.5*len;
 				break;
 			case 1:
 				 offsetX = 0;
@@ -294,22 +297,22 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 			case 2:
 				 offsetX = 0;
 				 offsetY = 0;
-				 offsetZ = -0.15*len;
+				 offsetZ = 0.15*len;
 				break;
 			case 3:
 				 offsetX = 0;
 				 offsetY = dia;
-				 offsetZ = -0.15*len;
+				 offsetZ = 0.15*len;
 				break;
 			case 4:
 				 offsetX = 0;
 				 offsetY = 0;
-				 offsetZ = -0.65*len;
+				 offsetZ = 0.65*len;
 				break;
 			case 5:
 				 offsetX = 0;
 				 offsetY = -1.5*dia;
-				 offsetZ = -0.65*len;
+				 offsetZ = 0.65*len;
 				break;
 
 
@@ -329,6 +332,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		WaypointMotionParameters motionParameters = waypointNodeConfigFactory.createSharedMotionParameters();
 		Pose pose = createPoseUsingCenterPoseAndOffset(positionParameters.getPose(), xOffsetInMM, yOffsetInMM, zOffsetInMM,
 				Length.Unit.MM);
+		
 
 		return waypointNodeConfigFactory.createFixedPositionConfig(pose, positionParameters.getJointPositions(), positionParameters.getTCPOffset(),
 				blendParameters, motionParameters);
@@ -336,6 +340,8 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 
 	private Pose createPoseUsingCenterPoseAndOffset(Pose pose, double xOffset, double yOffset, double zOffset,
 													Length.Unit unit) {
+		
+		
 		double x = pose.getPosition().getX(unit) + xOffset;
 		double y = pose.getPosition().getY(unit) + yOffset;
 		double z = pose.getPosition().getZ(unit) + zOffset;
