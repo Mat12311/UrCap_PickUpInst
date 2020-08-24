@@ -266,21 +266,60 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 
 	private void configureWaypointNodes(PositionParameters positionParameters) {
 		// adjust orientation according to base
-		double baseAngle = positionParameters.getJointPositions().getAllJointPositions()[0].getAngle(Angle.Unit.RAD) + (Math.PI / 2);
-		double xContribution = Math.cos(baseAngle);
-		double yContribution = Math.sin(baseAngle);
+		//double baseAngle = positionParameters.getJointPositions().getAllJointPositions()[0].getAngle(Angle.Unit.RAD) + (Math.PI / 2);
 
-		double angle = -Math.PI;
-		double angularStepDistance = (2 * Math.PI) / (double) NUMBER_OF_WAYPOINTS;
+
+			int len = getLen();
+			int dia = getDiam();
+			int i =0;
 
 		for (WaypointNode waypointNode : waypointNodes) {
-			angle += angularStepDistance;
-			double offsetX = Math.cos(angle) * HORIZONTAL_RADIUS_IN_MM * xContribution;
-			double offsetY = Math.cos(angle) * HORIZONTAL_RADIUS_IN_MM * yContribution;
-			double offsetZ = Math.sin(-angle) * VERTICAL_RADIUS_IN_MM;
+		
+			
+			double offsetX = 0;
+			double offsetY = 0;
+			double offsetZ = 0;
+			
+			switch (i) {
+			case 0:
+				 offsetX = 0;
+				 offsetY = 0;
+				 offsetZ = -1.5*len;
+				break;
+			case 1:
+				 offsetX = 0;
+				 offsetY = 0;
+				 offsetZ = 0;
+				break;
+			case 2:
+				 offsetX = 0;
+				 offsetY = 0;
+				 offsetZ = -0.15*len;
+				break;
+			case 3:
+				 offsetX = 0;
+				 offsetY = dia;
+				 offsetZ = -0.15*len;
+				break;
+			case 4:
+				 offsetX = 0;
+				 offsetY = 0;
+				 offsetZ = -0.65*len;
+				break;
+			case 5:
+				 offsetX = 0;
+				 offsetY = -1.5*dia;
+				 offsetZ = -0.65*len;
+				break;
+
+
+			default:
+				break;
+			};
 
 			WaypointNodeConfig newWaypointNodeConfig = createWaypointConfig(positionParameters, offsetX, offsetY, offsetZ);
 			waypointNode.setConfig(newWaypointNodeConfig);
+			i++;
 		}
 	}
 
