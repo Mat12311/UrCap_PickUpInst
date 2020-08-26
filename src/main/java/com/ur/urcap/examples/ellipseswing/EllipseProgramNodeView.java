@@ -65,8 +65,9 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 		
 		panel.add(createDescrption("Part Dimensions"));
 		panel.add(createTextFieldSlider(lenTextField, lenSlider, 0, 200, Llen, provider));
-		//panel.add(createDescrption("Diameter"));
+		panel.add(createVerticalSpacing());
 		panel.add(createTextFieldSlider(diamTextField, diamSlider, 0, 100, Ldia, provider));
+		panel.add(createVerticalSpacing());
 		
 		
 		infoSection.add(createInfo(" Number of Pick Up points "));
@@ -162,7 +163,7 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 		minus.setPreferredSize(new Dimension(10,10));
 		minus.setMinimumSize(plus.getPreferredSize());
 		
-		field.setPreferredSize(new Dimension(50,30));
+		field.setPreferredSize(new Dimension(30,30));
 		field.setMaximumSize(field.getPreferredSize());
 		
 		
@@ -222,13 +223,15 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 
 }
 	
+	
+	
 	private Box createTextFieldSlider(final JTextField field, final JSlider slider, int min, int max,JLabel label,
 			final ContributionProvider<EllipseProgramNodeContribution> provider) {
 		Box box = Box.createHorizontalBox();
 		box.setAlignmentX(Component.LEFT_ALIGNMENT);
 		JLabel lMax=new JLabel("max="+max);
 		JLabel lMin=new JLabel("min="+min);
-		field.setPreferredSize(new Dimension(40,20));
+		field.setPreferredSize(new Dimension(50,30));
 		field.setMaximumSize(field.getPreferredSize());
 		slider.setMinimum(min);
 		slider.setMaximum(max);
