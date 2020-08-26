@@ -148,6 +148,10 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		view.updateError(this.ellipseState.getMessage(), this.ellipseState.isError());
 		view.enableP2(dataModel.get(PICKUP_POSITION, (Pose) null) != null);
 		view.enableP3(dataModel.get(PICKUP_POSITION, (Pose) null) != null);
+		view.LP1.setText("");
+		view.LP2.setText("");
+		view.LP3.setText("");
+		
 	}
 
 	@Override
