@@ -11,10 +11,12 @@ import com.ur.urcap.api.domain.program.ProgramModel;
 import com.ur.urcap.api.domain.program.nodes.ProgramNodeFactory;
 import com.ur.urcap.api.domain.program.nodes.builtin.MoveNode;
 import com.ur.urcap.api.domain.program.nodes.builtin.WaypointNode;
+import com.ur.urcap.api.domain.program.nodes.builtin.configurations.movenode.MoveJMoveNodeConfig;
 import com.ur.urcap.api.domain.program.nodes.builtin.configurations.movenode.MoveNodeConfig;
 import com.ur.urcap.api.domain.program.nodes.builtin.configurations.movenode.MoveNodeConfigFactory;
 import com.ur.urcap.api.domain.program.nodes.builtin.configurations.movenode.TCPSelection;
 import com.ur.urcap.api.domain.program.nodes.builtin.configurations.movenode.TCPSelectionFactory;
+import com.ur.urcap.api.domain.program.nodes.builtin.configurations.movenode.builder.MoveJConfigBuilder;
 import com.ur.urcap.api.domain.program.nodes.builtin.configurations.movenode.builder.MoveNodeConfigBuilders;
 import com.ur.urcap.api.domain.program.nodes.builtin.configurations.movenode.builder.MovePConfigBuilder;
 import com.ur.urcap.api.domain.program.nodes.builtin.configurations.waypointnode.BlendParameters;
@@ -146,8 +148,9 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	@Override
 	public void openView() {
 		view.updateError(this.ellipseState.getMessage(), this.ellipseState.isError());
-		view.enableP2(dataModel.get(PICKUP_POSITION, (Pose) null) != null);
-		view.enableP3(dataModel.get(PICKUP_POSITION, (Pose) null) != null);
+		//view.enableP2(dataModel.get(PICKUP_POSITION, (Pose) null) != null);
+		view.enableP2(false);
+		view.enableP3(false);
 		view.LP1.setText("");
 		view.LP2.setText("");
 		view.LP3.setText("");
@@ -180,18 +183,41 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		
 	}
 
-	public void selectPickUpPoint(final int n) {
+	public void selectPickUpPoint(final int n, final int l) {
 		clearErrors();
 		UserInterfaceAPI uiapi = apiProvider.getUserInterfaceAPI();
+		//view.LP1.setText("Start the Robot");
 		uiapi.getUserInteraction().getUserDefinedRobotPosition(new RobotPositionCallback2() {
 			@Override
 			public void onOk(PositionParameters positionParameters) {
 				
 				
-				if(n>1) removeNodes();
+				if(n>0) {
+					removeNodes();
+					view.p1=0;
+					view.p2=0;
+					view.p3=0;
+				}
 				createNodes();
 				configureMoveNode();
 				adjustWaypointsToCenterPoint(positionParameters);
+				
+				//view.LP1.setText("READY");
+				switch (l) {
+				case 1:
+					view.LP1.setText("READY");
+					break;
+				case 2:
+					view.LP2.setText("READY");
+					break;
+				case 3:
+					view.LP3.setText("READY");
+					break;
+
+				default:
+					break;
+				}
+				
 			}
 		});
 	}
@@ -396,6 +422,10 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 				
 
 		moveNode.setConfig(movePConfigBuilder.build());
+		
+		//// test MoveJ
+		
+		MoveJConfigBuilder moveJConfigBuilder = moveNode.getConfigBuilders().createMoveJConfigBuilder();
 		
 	}
 

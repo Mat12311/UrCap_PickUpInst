@@ -25,6 +25,10 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+
+
 public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgramNodeContribution> {
 
 	private final Style style;
@@ -40,9 +44,9 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 	private JLabel Llen = new JLabel("Lenght   ");
 	private JLabel Ldia = new JLabel("Diameter");
 	
-	private JTextField pickTextField = new JTextField("1");
-	private JTextField lenTextField = new JTextField("0");
-	private JTextField diamTextField = new JTextField("0");
+	private JLabel pickTextField = new JLabel("1");
+	private JLabel lenLabel= new JLabel("0");
+	private JLabel diamLabel = new JLabel("0");
 	
 	private JSlider lenSlider = new JSlider();
 	private JSlider diamSlider = new JSlider();
@@ -51,6 +55,11 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 	public int p1=0; 
 	public int p2=0;
 	public int p3=0;
+	public int labelNum =0;
+	
+	public Icon getIcon() {
+		return new ImageIcon(getClass().getResource("/icons/acme_logo.png"));
+	}
 
 	public EllipseProgramNodeView(Style style) {
 		this.style = style;
@@ -64,16 +73,17 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 		Box infoSection = createSection(BoxLayout.PAGE_AXIS);
 		
 		panel.add(createDescrption("Part Dimensions"));
-		panel.add(createTextFieldSlider(lenTextField, lenSlider, 0, 200, Llen, provider));
-		panel.add(createVerticalSpacing());
-		panel.add(createTextFieldSlider(diamTextField, diamSlider, 0, 100, Ldia, provider));
-		panel.add(createVerticalSpacing());
+		panel.add(createVerticalSpacing1(10));
+		panel.add(createLabelSlider(lenLabel, lenSlider, 0, 200, Llen, provider));
+		panel.add(createVerticalSpacing1(10));
+		panel.add(createLabelSlider(diamLabel, diamSlider, 0, 100, Ldia, provider));
+		panel.add(createVerticalSpacing1(10));
 		
 		
 		infoSection.add(createInfo(" Number of Pick Up points "));
 		panel.add(infoSection);
 		panel.add(createVerticalSpacing());
-		panel.add(createTextFieldButton(pickTextField, provider));
+		panel.add(createLabelButton(pickTextField, provider));
 		panel.add(createDescrption("Pick Up Point Set"));
 		
 		// create Button P 
@@ -84,10 +94,12 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				p1++;
 				
-				provider.get().selectPickUpPoint(p1);
-				LP1.setText("READY");;
+				labelNum=1;
+				
+				provider.get().selectPickUpPoint(p1,labelNum);
+				//LP1.setText("READY");
+				p1++;
 			}
 		});
 		this.P1.setPreferredSize(style.getButtonSize());
@@ -105,9 +117,11 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 		this.P2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				labelNum=2;
+				provider.get().selectPickUpPoint(p2,labelNum);
+				//LP2.setText("READY");
 				p2++;
-				provider.get().selectPickUpPoint(p2);
-				LP2.setText("READY");
 			}
 		});
 		this.P2.setPreferredSize(style.getButtonSize());
@@ -126,10 +140,11 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				p3++;			
-				provider.get().selectPickUpPoint(p3);
-				LP3.setText("READY");
-				
+					
+				labelNum=3;
+				provider.get().selectPickUpPoint(p3,labelNum);
+				//LP3.setText("READY");
+				p3++;
 			}
 		});
 		this.P3.setPreferredSize(style.getButtonSize());
@@ -147,11 +162,12 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 		this.errorLabel = new JLabel();
 		errorSection.add(this.errorLabel);
 		panel.add(errorSection);
+		//panel.add(getIcon());
 
 	}
 	
 	
-	private Box createTextFieldButton(final JTextField field, 
+	private Box createLabelButton(final JLabel label, 
 			final ContributionProvider<EllipseProgramNodeContribution> provider) {
 		Box box = Box.createHorizontalBox();
 		box.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -163,15 +179,15 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 		minus.setPreferredSize(new Dimension(10,10));
 		minus.setMinimumSize(plus.getPreferredSize());
 		
-		field.setPreferredSize(new Dimension(30,30));
-		field.setMaximumSize(field.getPreferredSize());
+		label.setPreferredSize(new Dimension(30,30));
+		label.setMaximumSize(label.getPreferredSize());
 		
 		
 		plus.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int txt= Integer.parseInt(field.getText());
+				int txt= Integer.parseInt(label.getText());
 				txt++;
 				if(txt==2) enableP2(true);
 				if(txt==3) enableP3(true);
@@ -179,7 +195,7 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 				
 				
 				provider.get().onPickValueChange(txt);
-				field.setText(String.valueOf(txt));
+				label.setText(String.valueOf(txt));
 				
 				
 				
@@ -192,13 +208,13 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int txt= Integer.parseInt(field.getText());
+				int txt= Integer.parseInt(label.getText());
 				txt--;
 				if(txt<1) txt=1;
 				if(txt<2) enableP2(false);
 				if(txt<3) enableP3(false);
 				provider.get().onPickValueChange(txt);
-				field.setText(String.valueOf(txt));
+				label.setText(String.valueOf(txt));
 							
 			}
 		});
@@ -206,7 +222,7 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 		
 		
 		box.add(minus);
-		box.add(field);
+		box.add(label);
 		box.add(plus);
 		
 		
@@ -225,14 +241,14 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 	
 	
 	
-	private Box createTextFieldSlider(final JTextField field, final JSlider slider, int min, int max,JLabel label,
+	private Box createLabelSlider(final JLabel label1, final JSlider slider, int min, int max,JLabel label,
 			final ContributionProvider<EllipseProgramNodeContribution> provider) {
 		Box box = Box.createHorizontalBox();
 		box.setAlignmentX(Component.LEFT_ALIGNMENT);
 		JLabel lMax=new JLabel("max="+max);
 		JLabel lMin=new JLabel("min="+min);
-		field.setPreferredSize(new Dimension(50,30));
-		field.setMaximumSize(field.getPreferredSize());
+		label1.setPreferredSize(new Dimension(50,30));
+		label1.setMaximumSize(label1.getPreferredSize());
 		slider.setMinimum(min);
 		slider.setMaximum(max);
 		slider.setValue(0);
@@ -246,16 +262,16 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				int newValue = slider.getValue();
-				if(field==lenTextField) provider.get().onLenValueChange(newValue);
-				if(field==diamTextField) provider.get().onDiamValueChange(newValue);
-				field.setText(String.valueOf(newValue));
+				if(label1==lenLabel) provider.get().onLenValueChange(newValue);
+				if(label1==diamLabel) provider.get().onDiamValueChange(newValue);
+				label1.setText(String.valueOf(newValue));
 				
 				
 			}
 		});
 	
 		box.add(label);
-		box.add(field);
+		box.add(label1);
 		box.add(lMin);
 		box.add(slider);
 		box.add(lMax);
@@ -305,6 +321,11 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 	Component createVerticalSpacing() {
 		return Box.createRigidArea(new Dimension(0, style.getVerticalSpacing()));
 	}
+	
+	Component createVerticalSpacing1(int s) {
+		return Box.createRigidArea(new Dimension(0, s));
+	}
+	
 
 	JButton createButton(String text) {
 		return new JButton(text);
