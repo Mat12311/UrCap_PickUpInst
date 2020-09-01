@@ -44,9 +44,9 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 	private JLabel Llen = new JLabel("Lenght   ");
 	private JLabel Ldia = new JLabel("Diameter");
 	
-	private JLabel pickTextField = new JLabel("1");
-	private JLabel lenLabel= new JLabel("0");
-	private JLabel diamLabel = new JLabel("0");
+	public JLabel pickTextField = new JLabel("1");
+	public  JLabel lenLabel= new JLabel("0");
+	public JLabel diamLabel = new JLabel("0");
 	
 	private JSlider lenSlider = new JSlider();
 	private JSlider diamSlider = new JSlider();
@@ -56,6 +56,7 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 	public int p2=0;
 	public int p3=0;
 	public int labelNum =0;
+	public JLabel text = new JLabel("");
 	
 	public Icon getIcon() {
 		return new ImageIcon(getClass().getResource("/icons/acme_logo.png"));
@@ -154,6 +155,7 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 		buttonSection3.add(LP3);
 		panel.add(buttonSection3);
 		panel.add(createVerticalSpacing());
+		panel.add(text);
 		
 		
 

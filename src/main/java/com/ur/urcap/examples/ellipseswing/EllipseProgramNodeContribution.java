@@ -154,6 +154,10 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		view.LP1.setText("");
 		view.LP2.setText("");
 		view.LP3.setText("");
+		view.text.setText("");
+		//view.diamLabel.setText("0");
+		//view.lenLabel.setText("0");
+	
 		
 	}
 
@@ -186,7 +190,13 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	public void selectPickUpPoint(final int n, final int l) {
 		clearErrors();
 		UserInterfaceAPI uiapi = apiProvider.getUserInterfaceAPI();
-		//view.LP1.setText("Start the Robot");
+		view.text.setText("");
+		if(getDiam()==0 || getLen()==0) {
+			view.text.setText("Set Leng and Diam");
+			return;
+			
+		}
+		
 		uiapi.getUserInteraction().getUserDefinedRobotPosition(new RobotPositionCallback2() {
 			@Override
 			public void onOk(PositionParameters positionParameters) {
