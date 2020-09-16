@@ -20,6 +20,7 @@ import javax.swing.event.ChangeListener;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -41,10 +42,10 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 	public JLabel LP1 = new JLabel("");
 	public JLabel LP2 = new JLabel("");
 	public JLabel LP3 = new JLabel("");
-	private JLabel Llen = new JLabel("Lenght   ");
-	private JLabel Ldia = new JLabel("Diameter");
+	private JLabel Llen = new JLabel("Lenght:   ");
+	private JLabel Ldia = new JLabel("Diameter:");
 	
-	public JLabel pickTextField = new JLabel("1");
+	public JLabel pickLabel = new JLabel("1");
 	public  JLabel lenLabel= new JLabel("0");
 	public JLabel diamLabel = new JLabel("0");
 	
@@ -84,7 +85,7 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 		infoSection.add(createInfo(" Number of Pick Up points "));
 		panel.add(infoSection);
 		panel.add(createVerticalSpacing());
-		panel.add(createLabelButton(pickTextField, provider));
+		panel.add(createLabelButton(pickLabel, provider));
 		panel.add(createDescrption("Pick Up Point Set"));
 		
 		// create Button P 
@@ -183,6 +184,7 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 		
 		label.setPreferredSize(new Dimension(30,30));
 		label.setMaximumSize(label.getPreferredSize());
+		label.setFont(label.getFont().deriveFont(Font.BOLD));
 		
 		
 		plus.addActionListener(new ActionListener() {
@@ -236,6 +238,7 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 		box.setAlignmentX(Component.LEFT_ALIGNMENT);
 		
 		JLabel label = new JLabel(desc);
+		label.setFont(label.getFont().deriveFont(Font.BOLD));
 		box.add(label);
 		return box;
 
@@ -251,6 +254,7 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 		JLabel lMin=new JLabel("min="+min);
 		label1.setPreferredSize(new Dimension(50,30));
 		label1.setMaximumSize(label1.getPreferredSize());
+		label1.setFont(label1.getFont().deriveFont(Font.BOLD));
 		slider.setMinimum(min);
 		slider.setMaximum(max);
 		slider.setValue(0);

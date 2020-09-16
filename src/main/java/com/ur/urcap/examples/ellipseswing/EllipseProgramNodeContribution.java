@@ -84,7 +84,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	private final EllipseProgramNodeView view;
 	private final RobotMovement robotMovement;
 	private EllipseState ellipseState = new EllipseState();
-	private int n = 0;
+	//private int n = 0;
 
 	public EllipseProgramNodeContribution(ProgramAPIProvider apiProvider, EllipseProgramNodeView view,
 										  DataModel model) {
