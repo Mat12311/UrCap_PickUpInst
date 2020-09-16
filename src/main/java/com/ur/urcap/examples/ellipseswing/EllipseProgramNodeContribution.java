@@ -60,12 +60,29 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	private static final double VERTICAL_RADIUS_IN_MM = 120.0;
 	private static final int NUMBER_OF_WAYPOINTS = 6;
 	
+	//dataModel VAR
 	private static final String PICK_KEY = "pick";
 	private static final int DEFAULT_PICK = 1;
 	private static final String LEN_KEY = "len";
 	private static final int DEFAULT_LEN = 0;
 	private static final String DIAM_KEY = "diam";
 	private static final int DEFAULT_DIAM = 0;
+	
+	// dataModel enable/disable  button
+	
+	private static final String P ="P";
+	private static final boolean DEFAULT_P = false;
+	private static final String P1 ="P1";
+	private static final boolean DEFAULT_P1 = false;
+	private static final String P2 ="P2";
+	private static final boolean DEFAULT_P2 = false;
+	// dataModel enable/disable label
+	private static final String P_R ="P_R";
+	private static final boolean DEFAULT_P_R = false;
+	private static final String P1_R ="P1_R";
+	private static final boolean DEFAULT_P1_R = false;
+	private static final String P2_R ="P2_R";
+	private static final boolean DEFAULT_P2_R = false;
 
 	private final ProgramAPIProvider apiProvider;
 	private final ProgramNodeFactory programNodeFactory;
@@ -157,6 +174,14 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		view.text.setText("");
 		//view.diamLabel.setText("0");
 		//view.lenLabel.setText("0");
+		
+		view.setLenLabel(getLen());
+		view.setDiamLabel(getDiam());
+		view.setPickLabel(getPick());
+
+		view.setLenSlider(getLen());
+		view.setDiamSlider(getDiam());
+		
 	
 		
 	}
@@ -179,9 +204,9 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	@Override
 	public void generateScript(ScriptWriter writer) {
 		writer.writeChildren();
-		writer.appendLine("global Diam = "+getDiam()+"");
-		writer.appendLine("global Len = "+getLen()+"");
-		writer.appendLine("global Pick = "+getPick()+"");
+		writer.appendLine("global hbb_Diam = "+getDiam()+"");
+		writer.appendLine("global hbb_Len = "+getLen()+"");
+		writer.appendLine("global hbb_Pick = "+getPick()+"");
 		//writer.appendLine("global P1 = "+dataModel.get(PICKUP_POSITION, 0)+"");
 		
 		
@@ -264,7 +289,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	private String getErrorMessage(MovementErrorEvent.ErrorType errorType) {
 		switch (errorType) {
 			case UNREACHABLE_POSE:
-				return "Could not move to center point.";
+				return "Could not move to  point.";
 
 			default:
 				return "Error in move here";

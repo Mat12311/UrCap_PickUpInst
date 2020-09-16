@@ -69,7 +69,9 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 	}
 
 	@Override
-	public void buildUI(JPanel panel, final ContributionProvider<EllipseProgramNodeContribution> provider) {
+	public void buildUI(JPanel panel, final ContributionProvider<EllipseProgramNodeContribution> provider)
+	{
+		
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
 		Box infoSection = createSection(BoxLayout.PAGE_AXIS);
@@ -169,6 +171,32 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 
 	}
 	
+	// set data from dataModel
+	
+	public void setLenLabel(int value) {
+		lenLabel.setText(String.valueOf(value));
+		
+	}
+	public void setDiamLabel(int value) {
+		diamLabel.setText(String.valueOf(value));
+		
+	}
+	
+	
+	public void setLenSlider(int value) {
+		lenSlider.setValue(value);
+		
+	}
+	public void setDiamSlider(int value) {
+		diamSlider.setValue(value);
+		
+	}
+	
+	public void setPickLabel(int value) {
+		pickLabel.setText(String.valueOf(value));
+	}
+
+	
 	
 	private Box createLabelButton(final JLabel label, 
 			final ContributionProvider<EllipseProgramNodeContribution> provider) {
@@ -255,6 +283,8 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 		label1.setPreferredSize(new Dimension(50,30));
 		label1.setMaximumSize(label1.getPreferredSize());
 		label1.setFont(label1.getFont().deriveFont(Font.BOLD));
+		label.setPreferredSize(new Dimension(90,30));
+		label.setMaximumSize(label1.getPreferredSize());
 		slider.setMinimum(min);
 		slider.setMaximum(max);
 		slider.setValue(0);
