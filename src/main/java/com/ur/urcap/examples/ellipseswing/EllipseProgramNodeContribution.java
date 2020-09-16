@@ -435,7 +435,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		
 		//// test MoveJ
 		
-		MoveJConfigBuilder moveJConfigBuilder = moveNode.getConfigBuilders().createMoveJConfigBuilder();
+		//MoveJConfigBuilder moveJConfigBuilder = moveNode.getConfigBuilders().createMoveJConfigBuilder();
 		
 	}
 
@@ -447,7 +447,26 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	}
 
 	private static String createWaypointName(int waypointNumber) {
-		return "PickUpPoints" + waypointNumber;
+		switch (waypointNumber) {
+		case 1:
+			return "OverPart";
+		case 2:
+			return "PickPart";
+		case 3:
+			return "OverPickPart";
+		case 4:
+			return "TransitPoint1";
+		case 5:
+			return "TransitPoint2";
+		case 6:
+			return "LeavingFeeder";
+			
+
+		default:
+			return "PickUpPoints" + waypointNumber;
+		}
+		
+		///return "PickUpPoints" + waypointNumber;
 	}
 
 	private void lockTreeNodes() {
