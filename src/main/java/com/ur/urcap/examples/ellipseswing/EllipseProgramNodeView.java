@@ -125,7 +125,7 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 				labelNum=2;
 				provider.get().selectPickUpPoint(p2,labelNum);
 				//LP2.setText("READY");
-				p2++;
+				p2=1;
 			}
 		});
 		this.P1.setPreferredSize(style.getButtonSize());
@@ -148,7 +148,7 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 				labelNum=3;
 				provider.get().selectPickUpPoint(p3,labelNum);
 				//LP3.setText("READY");
-				p3++;
+				p3=1;
 			}
 		});
 		this.P2.setPreferredSize(style.getButtonSize());
@@ -305,7 +305,7 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 		slider.setValue(0);
 		slider.setOrientation(JSlider.HORIZONTAL);
 		
-		slider.setPreferredSize(new Dimension(300,20));
+		slider.setPreferredSize(new Dimension(350,30));
 		slider.setMaximumSize(slider.getPreferredSize());
 		
 		slider.addChangeListener(new ChangeListener() {

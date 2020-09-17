@@ -327,11 +327,17 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 			public void onOk(PositionParameters positionParameters) {
 				
 				
-				if(n>0) {
+				if(n==1) {
 					removeNodes();
 					view.p1=0;
 					view.p2=0;
 					view.p3=0;
+					view.LP.setText("");
+					onPRstateChange("");
+					view.LP1.setText("");
+					onP1RstateChange("");
+					view.LP2.setText("");
+					onP2RstateChange("");
 				}
 				createNodes();
 				configureMoveNode();
