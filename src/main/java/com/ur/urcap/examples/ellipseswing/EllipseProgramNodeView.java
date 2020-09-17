@@ -35,9 +35,9 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 	private final Style style;
 	private final Icon errorIcon;
 
+	private JButton P;
 	private JButton P1;
 	private JButton P2;
-	private JButton P3;
 	
 	public JLabel LP1 = new JLabel("");
 	public JLabel LP2 = new JLabel("");
@@ -91,10 +91,10 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 		panel.add(createDescrption("Pick Up Point Set"));
 		
 		// create Button P 
-		final Box buttonSection1 = createSection(BoxLayout.LINE_AXIS);
-		buttonSection1.add(createHorizontalIndent());
-		this.P1 = createButton("P");
-		this.P1.addActionListener(new ActionListener() {
+		final Box buttonSection = createSection(BoxLayout.LINE_AXIS);
+		buttonSection.add(createHorizontalIndent());
+		this.P = createButton("P");
+		this.P.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -106,19 +106,19 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 				p1++;
 			}
 		});
-		this.P1.setPreferredSize(style.getButtonSize());
-		this.P1.setMinimumSize(style.getButtonSize());
-		this.P1.setMaximumSize(style.getButtonSize());
-		buttonSection1.add(this.P1, FlowLayout.LEFT);
-		buttonSection1.add(LP1);
-		panel.add(buttonSection1);
+		this.P.setPreferredSize(style.getButtonSize());
+		this.P.setMinimumSize(style.getButtonSize());
+		this.P.setMaximumSize(style.getButtonSize());
+		buttonSection.add(this.P, FlowLayout.LEFT);
+		buttonSection.add(LP1);
+		panel.add(buttonSection);
 		panel.add(createVerticalSpacing());
 		
 		// create Button P1 
-		final Box buttonSection2 = createSection(BoxLayout.LINE_AXIS);
-		buttonSection2.add(createHorizontalIndent());
-		this.P2 = createButton("P1");
-		this.P2.addActionListener(new ActionListener() {
+		final Box buttonSection1 = createSection(BoxLayout.LINE_AXIS);
+		buttonSection1.add(createHorizontalIndent());
+		this.P1 = createButton("P1");
+		this.P1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
@@ -128,19 +128,19 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 				p2++;
 			}
 		});
-		this.P2.setPreferredSize(style.getButtonSize());
-		this.P2.setMinimumSize(style.getButtonSize());
-		this.P2.setMaximumSize(style.getButtonSize());
-		buttonSection2.add(this.P2, FlowLayout.LEFT);
-		buttonSection2.add(LP2);
-		panel.add(buttonSection2);
+		this.P1.setPreferredSize(style.getButtonSize());
+		this.P1.setMinimumSize(style.getButtonSize());
+		this.P1.setMaximumSize(style.getButtonSize());
+		buttonSection1.add(this.P1, FlowLayout.LEFT);
+		buttonSection1.add(LP2);
+		panel.add(buttonSection1);
 		panel.add(createVerticalSpacing());
 		
 		// create Button P2 
-		final Box buttonSection3 = createSection(BoxLayout.LINE_AXIS);
-		buttonSection3.add(createHorizontalIndent());
-		this.P3 = createButton("P2");
-		this.P3.addActionListener(new ActionListener() {
+		final Box buttonSection2 = createSection(BoxLayout.LINE_AXIS);
+		buttonSection2.add(createHorizontalIndent());
+		this.P2 = createButton("P2");
+		this.P2.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -151,12 +151,12 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 				p3++;
 			}
 		});
-		this.P3.setPreferredSize(style.getButtonSize());
-		this.P3.setMinimumSize(style.getButtonSize());
-		this.P3.setMaximumSize(style.getButtonSize());
-		buttonSection3.add(this.P3, FlowLayout.LEFT);
-		buttonSection3.add(LP3);
-		panel.add(buttonSection3);
+		this.P2.setPreferredSize(style.getButtonSize());
+		this.P2.setMinimumSize(style.getButtonSize());
+		this.P2.setMaximumSize(style.getButtonSize());
+		buttonSection2.add(this.P2, FlowLayout.LEFT);
+		buttonSection2.add(LP3);
+		panel.add(buttonSection2);
 		panel.add(createVerticalSpacing());
 		panel.add(text);
 		
@@ -196,6 +196,13 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 		pickLabel.setText(String.valueOf(value));
 	}
 
+	public void enableP1(boolean isEnabled) {
+		P1.setEnabled(isEnabled);
+	}
+	
+	public void enableP2(boolean isEnabled) {
+		P2.setEnabled(isEnabled);
+	}
 	
 	
 	private Box createLabelButton(final JLabel label, 
@@ -221,8 +228,12 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 			public void actionPerformed(ActionEvent e) {
 				int txt= Integer.parseInt(label.getText());
 				txt++;
-				if(txt==2) enableP2(true);
-				if(txt==3) enableP3(true);
+				if(txt==2) { provider.get().onP1stateChange(true);
+						enableP1(true);
+				}
+				if(txt==3) { provider.get().onP2stateChange(true);
+						enableP2(true);
+				}
 				if(txt>3) txt=3;
 				
 				
@@ -243,8 +254,12 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 				int txt= Integer.parseInt(label.getText());
 				txt--;
 				if(txt<1) txt=1;
-				if(txt<2) enableP2(false);
-				if(txt<3) enableP3(false);
+				if(txt<2) { provider.get().onP1stateChange(false);
+						enableP1(false);
+				}
+				if(txt<3) { provider.get().onP2stateChange(false);
+						enableP2(false);
+				}
 				provider.get().onPickValueChange(txt);
 				label.setText(String.valueOf(txt));
 							
@@ -374,11 +389,5 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 		return panel;
 	}
 
-	public void enableP2(boolean isEnabled) {
-		P2.setEnabled(isEnabled);
-	}
-	
-	public void enableP3(boolean isEnabled) {
-		P3.setEnabled(isEnabled);
-	}
+
 }
