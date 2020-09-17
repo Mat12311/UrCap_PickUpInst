@@ -39,9 +39,9 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 	private JButton P1;
 	private JButton P2;
 	
+	public JLabel LP = new JLabel("");
 	public JLabel LP1 = new JLabel("");
 	public JLabel LP2 = new JLabel("");
-	public JLabel LP3 = new JLabel("");
 	private JLabel Llen = new JLabel("Lenght:   ");
 	private JLabel Ldia = new JLabel("Diameter:");
 	
@@ -110,7 +110,7 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 		this.P.setMinimumSize(style.getButtonSize());
 		this.P.setMaximumSize(style.getButtonSize());
 		buttonSection.add(this.P, FlowLayout.LEFT);
-		buttonSection.add(LP1);
+		buttonSection.add(LP);
 		panel.add(buttonSection);
 		panel.add(createVerticalSpacing());
 		
@@ -132,7 +132,7 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 		this.P1.setMinimumSize(style.getButtonSize());
 		this.P1.setMaximumSize(style.getButtonSize());
 		buttonSection1.add(this.P1, FlowLayout.LEFT);
-		buttonSection1.add(LP2);
+		buttonSection1.add(LP1);
 		panel.add(buttonSection1);
 		panel.add(createVerticalSpacing());
 		
@@ -155,7 +155,7 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 		this.P2.setMinimumSize(style.getButtonSize());
 		this.P2.setMaximumSize(style.getButtonSize());
 		buttonSection2.add(this.P2, FlowLayout.LEFT);
-		buttonSection2.add(LP3);
+		buttonSection2.add(LP2);
 		panel.add(buttonSection2);
 		panel.add(createVerticalSpacing());
 		panel.add(text);

@@ -78,11 +78,11 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	private static final boolean DEFAULT_P2 = false;
 	// dataModel enable/disable label
 	private static final String P_R_KEY ="P_R";
-	private static final boolean DEFAULT_P_R = false;
+	private static final String DEFAULT_P_R = "";
 	private static final String P1_R_KEY ="P1_R";
-	private static final boolean DEFAULT_P1_R = false;
+	private static final String DEFAULT_P1_R = "";
 	private static final String P2_R_KEY ="P2_R";
-	private static final boolean DEFAULT_P2_R = false;
+	private static final String DEFAULT_P2_R = "";
 
 	private final ProgramAPIProvider apiProvider;
 	private final ProgramNodeFactory programNodeFactory;
@@ -161,11 +161,11 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		return dataModel.get(DIAM_KEY,DEFAULT_DIAM);
 	}
 	
-	// Button state function 
+	// Button state function in dataModel
 	
 	public void onPstateChange(final boolean val) {
 		undoRedoManager.recordChanges(new UndoableChanges() {
-			
+		
 			@Override
 			public void executeChanges() {
 				dataModel.set(P_KEY,val);
@@ -210,6 +210,57 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	}
 	
 	
+	
+	
+	// Button Label state function in dataModel
+	public void onPRstateChange(final String val) {
+		undoRedoManager.recordChanges(new UndoableChanges() {
+		
+			@Override
+			public void executeChanges() {
+				dataModel.set(P_R_KEY,val);
+				
+			}
+		});
+	}
+	
+	private String getstatePR() {
+		return dataModel.get(P_R_KEY,DEFAULT_P_R);
+	}
+	
+	public void onP1RstateChange(final String val) {
+		undoRedoManager.recordChanges(new UndoableChanges() {
+			
+			@Override
+			public void executeChanges() {
+				dataModel.set(P1_R_KEY,val);
+				
+			}
+		});
+	}
+	
+	private String getstateP1R() {
+		return dataModel.get(P1_R_KEY,DEFAULT_P1_R);
+	}
+	
+	
+	public void onP2RstateChange(final String val) {
+		undoRedoManager.recordChanges(new UndoableChanges() {
+			
+			@Override
+			public void executeChanges() {
+				dataModel.set(P2_R_KEY,val);
+				
+			}
+		});
+	}
+	
+	private String getstateP2R() {
+		return dataModel.get(P2_R_KEY,DEFAULT_P2_R);
+	}
+	
+	
+	
 
 	@Override
 	public void openView() {
@@ -217,9 +268,9 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		//view.enableP2(dataModel.get(PICKUP_POSITION, (Pose) null) != null);
 		view.enableP1(getstateP1());
 		view.enableP2(getstateP2());
-		view.LP1.setText("");
-		view.LP2.setText("");
-		view.LP3.setText("");
+		view.LP.setText(getstatePR());
+		view.LP1.setText(getstateP1R());
+		view.LP2.setText(getstateP2R());
 		view.text.setText("");
 		//view.diamLabel.setText("0");
 		//view.lenLabel.setText("0");
@@ -289,13 +340,16 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 				//view.LP1.setText("READY");
 				switch (l) {
 				case 1:
-					view.LP1.setText("READY");
+					view.LP.setText("READY");
+					onPRstateChange("READY");
 					break;
 				case 2:
-					view.LP2.setText("READY");
+					view.LP1.setText("READY");
+					onP1RstateChange("READY");
 					break;
 				case 3:
-					view.LP3.setText("READY");
+					view.LP2.setText("READY");
+					onP2RstateChange("READY");
 					break;
 
 				default:
