@@ -91,6 +91,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	private MoveNode moveNode;
 
 	private final List<WaypointNode> waypointNodes = new ArrayList<WaypointNode>();
+	private final List<Pose> poses = new ArrayList<Pose>();
 	
 
 	private DataModel dataModel;
@@ -282,6 +283,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		view.setLenSlider(getLen());
 		view.setDiamSlider(getDiam());
 		
+		
 	
 		
 	}
@@ -309,7 +311,31 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		writer.appendLine("global hbb_Pick = "+getPick()+"");
 		//writer.appendLine("global P1 = "+dataModel.get(PICKUP_POSITION, 0)+"");
 		
+		//write pose to wariable
+		writer.appendLine("global hbb_P0 = "+poses.get(0)+"");
+		writer.appendLine("global hbb_P1 = "+poses.get(1)+"");
+		writer.appendLine("global hbb_P2 = "+poses.get(2)+"");
+		writer.appendLine("global hbb_P3 = "+poses.get(3)+"");
+		writer.appendLine("global hbb_P4 = "+poses.get(4)+"");
+		writer.appendLine("global hbb_P5 = "+poses.get(5)+"");
 		
+		if(getstateP1R()=="READY") {
+		writer.appendLine("global hbb_P10 = "+poses.get(6)+"");
+		writer.appendLine("global hbb_P11 = "+poses.get(7)+"");
+		writer.appendLine("global hbb_P12 = "+poses.get(8)+"");
+		writer.appendLine("global hbb_P13 = "+poses.get(9)+"");
+		writer.appendLine("global hbb_P14 = "+poses.get(10)+"");
+		writer.appendLine("global hbb_P15 = "+poses.get(11)+"");
+		}
+		
+		if(getstateP2R()=="READY") {
+		writer.appendLine("global hbb_P20 = "+poses.get(12)+"");
+		writer.appendLine("global hbb_P21 = "+poses.get(13)+"");
+		writer.appendLine("global hbb_P22 = "+poses.get(14)+"");
+		writer.appendLine("global hbb_P23 = "+poses.get(15)+"");
+		writer.appendLine("global hbb_P24 = "+poses.get(16)+"");
+		writer.appendLine("global hbb_P25 = "+poses.get(17)+"");
+		}
 	}
 
 	public void selectPickUpPoint(final int n, final int l) {
@@ -506,6 +532,9 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		WaypointMotionParameters motionParameters = waypointNodeConfigFactory.createSharedMotionParameters();
 		Pose pose = createPoseUsingCenterPoseAndOffset(positionParameters.getPose(), xOffsetInMM, yOffsetInMM, zOffsetInMM,
 				Length.Unit.MM);
+		
+		// add pose to List
+		poses.add(pose);
 		
 
 		return waypointNodeConfigFactory.createFixedPositionConfig(pose, positionParameters.getJointPositions(), positionParameters.getTCPOffset(),

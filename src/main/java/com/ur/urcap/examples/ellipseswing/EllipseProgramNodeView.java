@@ -13,7 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
-import javax.swing.JTextField;
+//import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -26,8 +26,8 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+//import javax.swing.Icon;
+//import javax.swing.ImageIcon;
 
 
 public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgramNodeContribution> {
@@ -58,10 +58,11 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 	public int p3=0;
 	public int labelNum =0;
 	public JLabel text = new JLabel("");
-	
+	/*
 	public Icon getIcon() {
 		return new ImageIcon(getClass().getResource("/icons/acme_logo.png"));
 	}
+	*/
 
 	public EllipseProgramNodeView(Style style) {
 		this.style = style;
