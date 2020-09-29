@@ -45,8 +45,8 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 	private JLabel Llen = new JLabel("Lenght:   ");
 	private JLabel Ldia = new JLabel("Diameter:");
 	
-	public JLabel pickLabel = new JLabel("1");
-	public  JLabel lenLabel= new JLabel("0");
+	public JLabel pickLabel = new JLabel(" 1");
+	public JLabel lenLabel= new JLabel("0");
 	public JLabel diamLabel = new JLabel("0");
 	
 	private JSlider lenSlider = new JSlider();
@@ -58,11 +58,7 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 	public int p3=0;
 	public int labelNum =0;
 	public JLabel text = new JLabel("");
-	/*
-	public Icon getIcon() {
-		return new ImageIcon(getClass().getResource("/icons/acme_logo.png"));
-	}
-	*/
+
 
 	public EllipseProgramNodeView(Style style) {
 		this.style = style;
@@ -217,6 +213,7 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 		JButton minus = new JButton("-");
 		minus.setPreferredSize(new Dimension(10,10));
 		minus.setMinimumSize(plus.getPreferredSize());
+		JLabel lab1 = new JLabel("   ");
 		
 		label.setPreferredSize(new Dimension(30,30));
 		label.setMaximumSize(label.getPreferredSize());
@@ -270,6 +267,7 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 		
 		
 		box.add(minus);
+		box.add(lab1);
 		box.add(label);
 		box.add(plus);
 		
