@@ -1,6 +1,7 @@
 package com.ur.urcap.examples.ellipseswing;
 
 import com.ur.urcap.api.contribution.ProgramNodeContribution;
+import com.ur.urcap.api.contribution.ViewAPIProvider;
 import com.ur.urcap.api.contribution.program.ProgramAPIProvider;
 import com.ur.urcap.api.domain.ProgramAPI;
 import com.ur.urcap.api.domain.UserInterfaceAPI;
@@ -83,6 +84,11 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	private static final String DEFAULT_P1_R = "";
 	private static final String P2_R_KEY ="P2_R";
 	private static final String DEFAULT_P2_R = "";
+	
+	public int p1; 
+	public int p2;
+	public int p3;
+	
 
 	private final ProgramAPIProvider apiProvider;
 	private final ProgramNodeFactory programNodeFactory;
@@ -103,6 +109,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	private final RobotMovement robotMovement;
 	private EllipseState ellipseState = new EllipseState();
 	//private int n = 0;
+	
 
 	public EllipseProgramNodeContribution(ProgramAPIProvider apiProvider, EllipseProgramNodeView view,
 										  DataModel model) {
@@ -290,7 +297,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 
 	@Override
 	public void closeView() {
-		// nothing needs to happen here in this example
+		//removeNodes();
 	}
 
 	@Override
@@ -318,6 +325,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		writer.appendLine("global hbb_P3 = "+poses.get(3)+"");
 		writer.appendLine("global hbb_P4 = "+poses.get(4)+"");
 		writer.appendLine("global hbb_P5 = "+poses.get(5)+"");
+		//removeNodes();
 		
 		if(getstateP1R()=="READY") {
 		writer.appendLine("global hbb_P10 = "+poses.get(6)+"");
@@ -326,6 +334,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		writer.appendLine("global hbb_P13 = "+poses.get(9)+"");
 		writer.appendLine("global hbb_P14 = "+poses.get(10)+"");
 		writer.appendLine("global hbb_P15 = "+poses.get(11)+"");
+		//removeNodes();
 		}
 		
 		if(getstateP2R()=="READY") {
@@ -335,10 +344,11 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		writer.appendLine("global hbb_P23 = "+poses.get(15)+"");
 		writer.appendLine("global hbb_P24 = "+poses.get(16)+"");
 		writer.appendLine("global hbb_P25 = "+poses.get(17)+"");
+		//removeNodes();
 		}
 	}
 
-	public void selectPickUpPoint(final int n, final int l) {
+	public void selectPickUpPoint( final int l) {
 		clearErrors();
 		UserInterfaceAPI uiapi = apiProvider.getUserInterfaceAPI();
 		view.text.setText("");
@@ -348,16 +358,17 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 			
 		}
 		
+		
 		uiapi.getUserInteraction().getUserDefinedRobotPosition(new RobotPositionCallback2() {
 			@Override
 			public void onOk(PositionParameters positionParameters) {
 				
 				
-				if(n==1) {
+				if(p1==1 && p2==1 && p3==1) {
 					removeNodes();
-					view.p1=0;
-					view.p2=0;
-					view.p3=0;
+					p1=0;
+					p2=0;
+					p3=0;
 					view.LP.setText("");
 					onPRstateChange("");
 					view.LP1.setText("");
@@ -374,14 +385,19 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 				case 1:
 					view.LP.setText("READY");
 					onPRstateChange("READY");
+					p1=1;
+					//createNodes();
 					break;
 				case 2:
 					view.LP1.setText("READY");
 					onP1RstateChange("READY");
+					p2=1;
 					break;
 				case 3:
 					view.LP2.setText("READY");
 					onP2RstateChange("READY");
+					p3=1;
+					//removeNodes();
 					break;
 
 				default:
@@ -453,7 +469,8 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 			setDefined(false);
 			resetWaypointNodes();
 		}
-		lockTreeNodes();
+		// !!!temo chan
+		//lockTreeNodes();
 		//view.enableMoveButton(true);
 	}
 

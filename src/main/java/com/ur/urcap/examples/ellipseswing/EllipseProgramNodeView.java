@@ -53,9 +53,10 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 	private JSlider diamSlider = new JSlider();
 	private JLabel errorLabel;
 	
-	public int p1=0; 
-	public int p2=0;
-	public int p3=0;
+	//public int p1; 
+	//public int p2;
+	//public int p3;
+	
 	public int labelNum =0;
 	public JLabel text = new JLabel("");
 
@@ -98,9 +99,9 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 				
 				labelNum=1;
 				
-				provider.get().selectPickUpPoint(p1,labelNum);
+				provider.get().selectPickUpPoint(labelNum);
 				//LP1.setText("READY");
-				p1++;
+				//p1=1;
 			}
 		});
 		this.P.setPreferredSize(style.getButtonSize());
@@ -120,9 +121,9 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 			public void actionPerformed(ActionEvent e) {
 				
 				labelNum=2;
-				provider.get().selectPickUpPoint(p2,labelNum);
+				provider.get().selectPickUpPoint(labelNum);
 				//LP2.setText("READY");
-				p2=1;
+				//p2=1;
 			}
 		});
 		this.P1.setPreferredSize(style.getButtonSize());
@@ -143,9 +144,9 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 			public void actionPerformed(ActionEvent e) {
 					
 				labelNum=3;
-				provider.get().selectPickUpPoint(p3,labelNum);
+				provider.get().selectPickUpPoint(labelNum);
 				//LP3.setText("READY");
-				p3=1;
+				//p3=1;
 			}
 		});
 		this.P2.setPreferredSize(style.getButtonSize());

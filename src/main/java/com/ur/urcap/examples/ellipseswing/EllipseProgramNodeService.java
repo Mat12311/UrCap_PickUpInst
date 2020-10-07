@@ -21,10 +21,11 @@ public class EllipseProgramNodeService
 
 	@Override
 	public void configureContribution(ContributionConfiguration configuration) {
-		configuration.setDeprecated(false);
+		// !!!!!!! temp chenged !!!!!!!!
+		//configuration.setDeprecated(false);
 		configuration.setChildrenAllowed(true);
-		configuration.setUserInsertable(true);
-
+		//configuration.setUserInsertable(true);
+		
 		ProgramDebuggingSupport programDebuggingSupport = configuration.getProgramDebuggingSupport();
 		programDebuggingSupport.setAllowBreakpointOnChildNodesInSubtree(true);
 		programDebuggingSupport.setAllowStartFromChildNodesInSubtree(true);
