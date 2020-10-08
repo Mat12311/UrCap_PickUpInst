@@ -13,10 +13,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
-//import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -26,8 +26,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-//import javax.swing.Icon;
-//import javax.swing.ImageIcon;
+
 
 
 public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgramNodeContribution> {
@@ -53,12 +52,11 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 	private JSlider diamSlider = new JSlider();
 	private JLabel errorLabel;
 	
-	//public int p1; 
-	//public int p2;
-	//public int p3;
+
 	
 	public int labelNum =0;
 	public JLabel text = new JLabel("");
+
 
 
 	public EllipseProgramNodeView(Style style) {
@@ -100,8 +98,7 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 				labelNum=1;
 				
 				provider.get().selectPickUpPoint(labelNum);
-				//LP1.setText("READY");
-				//p1=1;
+
 			}
 		});
 		this.P.setPreferredSize(style.getButtonSize());
@@ -122,8 +119,7 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 				
 				labelNum=2;
 				provider.get().selectPickUpPoint(labelNum);
-				//LP2.setText("READY");
-				//p2=1;
+				
 			}
 		});
 		this.P1.setPreferredSize(style.getButtonSize());
@@ -145,8 +141,7 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 					
 				labelNum=3;
 				provider.get().selectPickUpPoint(labelNum);
-				//LP3.setText("READY");
-				//p3=1;
+
 			}
 		});
 		this.P2.setPreferredSize(style.getButtonSize());
@@ -156,6 +151,9 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 		buttonSection2.add(LP2);
 		panel.add(buttonSection2);
 		panel.add(createVerticalSpacing());
+		
+		text.setBackground(Color.RED);
+		
 		panel.add(text);
 		
 		
