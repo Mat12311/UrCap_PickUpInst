@@ -89,7 +89,8 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	public int p1; 
 	public int p2;
 	public int p3;
-	
+	public int n =0;
+	public int f =0;
 
 	private final ProgramAPIProvider apiProvider;
 	private final ProgramNodeFactory programNodeFactory;
@@ -368,45 +369,103 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 			public void onOk(PositionParameters positionParameters) {
 				
 				
-				if(p1==1 && p2==1 && p3==1) {
-					removeNodes();
-					p1=0;
-					p2=0;
-					p3=0;
-					view.LP.setText("");
-					onPRstateChange("");
-					view.LP1.setText("");
-					onP1RstateChange("");
-					view.LP2.setText("");
-					onP2RstateChange("");
-				}
-				createNodes();
-				configureMoveNode();
-				adjustWaypointsToCenterPoint(positionParameters);
+
+//				
+//				if(p1==1 && p2==1 && p3==1 ) {
+//					removeNodes();
+//					
+//					
+//					view.LP.setText("");
+//					onPRstateChange("");
+//					view.LP1.setText("");
+//					onP1RstateChange("");
+//					view.LP2.setText("");
+//					onP2RstateChange("");
+//					
+//					p1=0;
+//					p2=0;
+//					p3=0;
+//					n=0;
+//					f=0;
+//				}
 				
-				//view.LP1.setText("READY");
+				if(getPick()==1 ) {
+					removeNodes();
+					n=0;
+					
+				}
+				
 				switch (l) {
 				case 1:
 					view.LP.setText("READY");
 					onPRstateChange("READY");
 					p1=1;
+					if(n>0) {
+						p2=1;
+						p3=1;
+					}
+					n++;
 					//createNodes();
 					break;
 				case 2:
 					view.LP1.setText("READY");
 					onP1RstateChange("READY");
 					p2=1;
+					if(n>1) {
+						p3=1;
+					}
+					n++;
 					break;
 				case 3:
 					view.LP2.setText("READY");
 					onP2RstateChange("READY");
-					p3=1;
+					//p3=1;
+					//p2=1;
+					//p1=1;
+					if(n>2) {
+						p3=1;
+					}
+					n++;
 					//removeNodes();
 					break;
 
 				default:
 					break;
 				}
+				
+
+				if(p1==1 && p2==1 && p3==1 ) {
+					removeNodes();
+					
+					//view.LP.setText("");
+					//onPRstateChange("");
+					view.LP.setText("");
+					onPRstateChange("");
+					view.LP1.setText("");
+					onP1RstateChange("");
+					view.LP2.setText("");
+					onP2RstateChange("");					
+					p1=0;
+					p2=0;
+					p3=0;
+					n=0;
+					f=1;
+					view.LP.setText("READY");
+					onPRstateChange("READY");
+					
+					
+				}
+				
+				
+				
+				createNodes();
+				configureMoveNode();
+				adjustWaypointsToCenterPoint(positionParameters);
+				
+				
+				
+				//view.LP1.setText("READY");
+			
 				
 			}
 		});
