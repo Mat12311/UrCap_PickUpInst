@@ -16,7 +16,7 @@ public class EllipseProgramNodeService
 
 	@Override
 	public String getId() {
-		return "PickUP";
+		return "PickUP2";
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class EllipseProgramNodeService
 
 	@Override
 	public String getTitle(Locale locale) {
-		return "PickUp";
+		return "PickUp2";
 	}
 
 	@Override

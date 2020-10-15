@@ -306,7 +306,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 
 	@Override
 	public String getTitle() {
-		return "PickUp";
+		return "PickUp2";
 	}
 
 	@Override
@@ -322,34 +322,48 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		writer.appendLine("global cpl_Pick = "+getPick()+"");
 		//writer.appendLine("global P1 = "+dataModel.get(PICKUP_POSITION, 0)+"");
 		
-//		//write pose to variable
-//		writer.appendLine("global hbb_P0 = "+poses.get(0)+"");
-//		writer.appendLine("global hbb_P1 = "+poses.get(1)+"");
-//		writer.appendLine("global hbb_P2 = "+poses.get(2)+"");
-//		writer.appendLine("global hbb_P3 = "+poses.get(3)+"");
-//		writer.appendLine("global hbb_P4 = "+poses.get(4)+"");
-//		writer.appendLine("global hbb_P5 = "+poses.get(5)+"");
+		//write pose to variable
+		writer.appendLine("global cpl_P0 = "+poses.get(0)+"");
+		writer.appendLine("global cpl_P1 = "+poses.get(1)+"");
+		writer.appendLine("global cpl_P2 = "+poses.get(2)+"");
+		writer.appendLine("global cpl_P3 = "+poses.get(3)+"");
+		writer.appendLine("global cpl_P4 = "+poses.get(4)+"");
+		writer.appendLine("global cpl_P5 = "+poses.get(5)+"");
+		//removeNodes();
+		
+		if(getstateP1R()=="READY") {
+		writer.appendLine("global cpl_P10 = "+poses.get(6)+"");
+		writer.appendLine("global cpl_P11 = "+poses.get(7)+"");
+		writer.appendLine("global cpl_P12 = "+poses.get(8)+"");
+		writer.appendLine("global cpl_P13 = "+poses.get(9)+"");
+		writer.appendLine("global cpl_P14 = "+poses.get(10)+"");
+		writer.appendLine("global cpl_P15 = "+poses.get(11)+"");
+		//removeNodes();
+		}else {
+			writer.appendLine("global cpl_P10 = "+0+"");
+			writer.appendLine("global cpl_P11 = "+0+"");
+			writer.appendLine("global cpl_P12 = "+0+"");
+			writer.appendLine("global cpl_P13 = "+0+"");
+			writer.appendLine("global cpl_P14 = "+0+"");
+			writer.appendLine("global cpl_P15 = "+0+"");	
+		}
+		
+		if(getstateP2R()=="READY") {
+		writer.appendLine("global cpl_P20 = "+poses.get(12)+"");
+		writer.appendLine("global cpl_P21 = "+poses.get(13)+"");
+		writer.appendLine("global cpl_P22 = "+poses.get(14)+"");
+		writer.appendLine("global cpl_P23 = "+poses.get(15)+"");
+		writer.appendLine("global cpl_P24 = "+poses.get(16)+"");
+		writer.appendLine("global cpl_P25 = "+poses.get(17)+"");
 //		//removeNodes();
-//		
-//		if(getstateP1R()=="READY") {
-//		writer.appendLine("global hbb_P10 = "+poses.get(6)+"");
-//		writer.appendLine("global hbb_P11 = "+poses.get(7)+"");
-//		writer.appendLine("global hbb_P12 = "+poses.get(8)+"");
-//		writer.appendLine("global hbb_P13 = "+poses.get(9)+"");
-//		writer.appendLine("global hbb_P14 = "+poses.get(10)+"");
-//		writer.appendLine("global hbb_P15 = "+poses.get(11)+"");
-//		//removeNodes();
-//		}
-//		
-//		if(getstateP2R()=="READY") {
-//		writer.appendLine("global hbb_P20 = "+poses.get(12)+"");
-//		writer.appendLine("global hbb_P21 = "+poses.get(13)+"");
-//		writer.appendLine("global hbb_P22 = "+poses.get(14)+"");
-//		writer.appendLine("global hbb_P23 = "+poses.get(15)+"");
-//		writer.appendLine("global hbb_P24 = "+poses.get(16)+"");
-//		writer.appendLine("global hbb_P25 = "+poses.get(17)+"");
-//		//removeNodes();
-//		}
+		}else {
+			writer.appendLine("global cpl_P20 = "+0+"");
+			writer.appendLine("global cpl_P21 = "+0+"");
+			writer.appendLine("global cpl_P22 = "+0+"");
+			writer.appendLine("global cpl_P23 = "+0+"");
+			writer.appendLine("global cpl_P24 = "+0+"");
+			writer.appendLine("global cpl_P25 = "+0+"");
+		}
 	}
 
 	// select Pick Up point using RobotPositionCallback

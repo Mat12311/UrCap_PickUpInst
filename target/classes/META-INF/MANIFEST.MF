@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1602238110512
+Bnd-LastModified: 1602768387259
 Build-Jdk: 1.8.0_265
 Built-By: ur
 Bundle-Activator: com.ur.urcap.examples.ellipseswing.Activator
@@ -10,36 +10,39 @@ Bundle-Copyright: Copyright (C) 2009-2020 Universal Robots. All Rights R
 Bundle-Description: Pose using Move tab sample URCap
 Bundle-LicenseType: Sample license
 Bundle-ManifestVersion: 2
-Bundle-Name: PickUp
-Bundle-SymbolicName: com.ur.urcap.examples.PickUp
+Bundle-Name: PickUp2
+Bundle-SymbolicName: com.ur.urcap.examples.PickUp2
 Bundle-Vendor: Universal Robots
 Bundle-Version: 1.0.0.SNAPSHOT
 Created-By: Apache Maven Bundle Plugin
 Export-Package: com.ur.urcap.examples.ellipseswing;version="1.0.0.SNAPSH
  OT";uses:="com.ur.urcap.api.contribution,com.ur.urcap.api.contribution.
- program,com.ur.urcap.api.contribution.program.swing,com.ur.urcap.api.do
- main.data,com.ur.urcap.api.domain.script,javax.swing,org.osgi.framework
- "
+ installation,com.ur.urcap.api.contribution.installation.swing,com.ur.ur
+ cap.api.contribution.program,com.ur.urcap.api.contribution.program.swin
+ g,com.ur.urcap.api.domain.data,com.ur.urcap.api.domain.script,javax.swi
+ ng,org.osgi.framework"
 Import-Package: com.ur.urcap.api.contribution;version="[1.8,2)",com.ur.u
- rcap.api.contribution.program;version="[1.8,2)",com.ur.urcap.api.contri
- bution.program.configuration.debugging;version="[1.7,2)",com.ur.urcap.a
- pi.contribution.program.swing;version="[1.7,2)",com.ur.urcap.api.domain
- ;version="[1.9,2)",com.ur.urcap.api.domain.data;version="[1.9,2)",com.u
- r.urcap.api.domain.feature;version="[1.9,2)",com.ur.urcap.api.domain.pr
- ogram;version="[1.8,2)",com.ur.urcap.api.domain.program.nodes;version="
- [1.8,2)",com.ur.urcap.api.domain.program.nodes.builtin;version="[1.9,2)
- ",com.ur.urcap.api.domain.program.nodes.builtin.configurations.movenode
- ;version="[1.7,2)",com.ur.urcap.api.domain.program.nodes.builtin.config
- urations.movenode.builder;version="[1.7,2)",com.ur.urcap.api.domain.pro
- gram.nodes.builtin.configurations.waypointnode;version="[1.9,2)",com.ur
- .urcap.api.domain.program.structure;version="[1.9,2)",com.ur.urcap.api.
- domain.script;version="[1.7,2)",com.ur.urcap.api.domain.undoredo;versio
- n="[1.7,2)",com.ur.urcap.api.domain.userinteraction;version="[1.8,2)",c
- om.ur.urcap.api.domain.userinteraction.robot.movement;version="[1.7,2)"
- ,com.ur.urcap.api.domain.validation;version="[1.7,2)",com.ur.urcap.api.
- domain.value;version="[1.8,2)",com.ur.urcap.api.domain.value.blend;vers
- ion="[1.7,2)",com.ur.urcap.api.domain.value.jointposition;version="[1.7
- ,2)",com.ur.urcap.api.domain.value.robotposition;version="[1.8,2)",com.
- ur.urcap.api.domain.value.simple;version="[1.8,2)",javax.imageio,javax.
- swing,javax.swing.event,org.osgi.framework;version="[1.6,2)"
+ rcap.api.contribution.installation;version="[1.7,2)",com.ur.urcap.api.c
+ ontribution.installation.swing;version="[1.7,2)",com.ur.urcap.api.contr
+ ibution.program;version="[1.8,2)",com.ur.urcap.api.contribution.program
+ .configuration.debugging;version="[1.7,2)",com.ur.urcap.api.contributio
+ n.program.swing;version="[1.7,2)",com.ur.urcap.api.domain;version="[1.9
+ ,2)",com.ur.urcap.api.domain.data;version="[1.9,2)",com.ur.urcap.api.do
+ main.feature;version="[1.9,2)",com.ur.urcap.api.domain.program;version=
+ "[1.8,2)",com.ur.urcap.api.domain.program.nodes;version="[1.8,2)",com.u
+ r.urcap.api.domain.program.nodes.builtin;version="[1.9,2)",com.ur.urcap
+ .api.domain.program.nodes.builtin.configurations.movenode;version="[1.7
+ ,2)",com.ur.urcap.api.domain.program.nodes.builtin.configurations.moven
+ ode.builder;version="[1.7,2)",com.ur.urcap.api.domain.program.nodes.bui
+ ltin.configurations.waypointnode;version="[1.9,2)",com.ur.urcap.api.dom
+ ain.program.structure;version="[1.9,2)",com.ur.urcap.api.domain.script;
+ version="[1.7,2)",com.ur.urcap.api.domain.undoredo;version="[1.7,2)",co
+ m.ur.urcap.api.domain.userinteraction;version="[1.8,2)",com.ur.urcap.ap
+ i.domain.userinteraction.robot.movement;version="[1.7,2)",com.ur.urcap.
+ api.domain.validation;version="[1.7,2)",com.ur.urcap.api.domain.value;v
+ ersion="[1.8,2)",com.ur.urcap.api.domain.value.blend;version="[1.7,2)",
+ com.ur.urcap.api.domain.value.jointposition;version="[1.7,2)",com.ur.ur
+ cap.api.domain.value.robotposition;version="[1.8,2)",com.ur.urcap.api.d
+ omain.value.simple;version="[1.8,2)",javax.imageio,javax.swing,javax.sw
+ ing.event,org.osgi.framework;version="[1.6,2)"
 Tool: Bnd-2.1.0.20130426-122213
