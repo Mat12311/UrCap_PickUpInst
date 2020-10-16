@@ -1,5 +1,6 @@
 package com.ur.urcap.examples.ellipseswing;
 
+
 import com.ur.urcap.api.contribution.ProgramNodeContribution;
 import com.ur.urcap.api.contribution.ViewAPIProvider;
 import com.ur.urcap.api.contribution.program.ProgramAPIProvider;
@@ -63,7 +64,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	
 	//dataModel VAR
 	private static final String PICK_KEY = "pick";
-	private static final int DEFAULT_PICK = 1;
+	private static final int DEFAULT_PICK = 0;
 	private static final String LEN_KEY = "len";
 	private static final int DEFAULT_LEN = 0;
 	private static final String DIAM_KEY = "diam";
@@ -294,6 +295,8 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		view.setLenSlider(getLen());
 		view.setDiamSlider(getDiam());
 		
+		getInstallation().checkInstal(getPick(), getDiam(), getLen(), poses);
+		
 		
 	
 		
@@ -323,47 +326,53 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		//writer.appendLine("global P1 = "+dataModel.get(PICKUP_POSITION, 0)+"");
 		
 		//write pose to variable
-		writer.appendLine("global cpl_P0 = "+poses.get(0)+"");
-		writer.appendLine("global cpl_P1 = "+poses.get(1)+"");
-		writer.appendLine("global cpl_P2 = "+poses.get(2)+"");
-		writer.appendLine("global cpl_P3 = "+poses.get(3)+"");
-		writer.appendLine("global cpl_P4 = "+poses.get(4)+"");
-		writer.appendLine("global cpl_P5 = "+poses.get(5)+"");
-		//removeNodes();
-		
-		if(getstateP1R()=="READY") {
-		writer.appendLine("global cpl_P10 = "+poses.get(6)+"");
-		writer.appendLine("global cpl_P11 = "+poses.get(7)+"");
-		writer.appendLine("global cpl_P12 = "+poses.get(8)+"");
-		writer.appendLine("global cpl_P13 = "+poses.get(9)+"");
-		writer.appendLine("global cpl_P14 = "+poses.get(10)+"");
-		writer.appendLine("global cpl_P15 = "+poses.get(11)+"");
-		//removeNodes();
-		}else {
-			writer.appendLine("global cpl_P10 = "+0+"");
-			writer.appendLine("global cpl_P11 = "+0+"");
-			writer.appendLine("global cpl_P12 = "+0+"");
-			writer.appendLine("global cpl_P13 = "+0+"");
-			writer.appendLine("global cpl_P14 = "+0+"");
-			writer.appendLine("global cpl_P15 = "+0+"");	
-		}
-		
-		if(getstateP2R()=="READY") {
-		writer.appendLine("global cpl_P20 = "+poses.get(12)+"");
-		writer.appendLine("global cpl_P21 = "+poses.get(13)+"");
-		writer.appendLine("global cpl_P22 = "+poses.get(14)+"");
-		writer.appendLine("global cpl_P23 = "+poses.get(15)+"");
-		writer.appendLine("global cpl_P24 = "+poses.get(16)+"");
-		writer.appendLine("global cpl_P25 = "+poses.get(17)+"");
+//		writer.appendLine("global cpl_P0 = "+poses.get(0)+"");
+//		writer.appendLine("global cpl_P1 = "+poses.get(1)+"");
+//		writer.appendLine("global cpl_P2 = "+poses.get(2)+"");
+//		writer.appendLine("global cpl_P3 = "+poses.get(3)+"");
+//		writer.appendLine("global cpl_P4 = "+poses.get(4)+"");
+//		writer.appendLine("global cpl_P5 = "+poses.get(5)+"");
 //		//removeNodes();
-		}else {
-			writer.appendLine("global cpl_P20 = "+0+"");
-			writer.appendLine("global cpl_P21 = "+0+"");
-			writer.appendLine("global cpl_P22 = "+0+"");
-			writer.appendLine("global cpl_P23 = "+0+"");
-			writer.appendLine("global cpl_P24 = "+0+"");
-			writer.appendLine("global cpl_P25 = "+0+"");
-		}
+//		
+//		if(getstateP1R()=="READY") {
+//		writer.appendLine("global cpl_P10 = "+poses.get(6)+"");
+//		writer.appendLine("global cpl_P11 = "+poses.get(7)+"");
+//		writer.appendLine("global cpl_P12 = "+poses.get(8)+"");
+//		writer.appendLine("global cpl_P13 = "+poses.get(9)+"");
+//		writer.appendLine("global cpl_P14 = "+poses.get(10)+"");
+//		writer.appendLine("global cpl_P15 = "+poses.get(11)+"");
+//		//removeNodes();
+//		}else {
+//			writer.appendLine("global cpl_P10 = "+0+"");
+//			writer.appendLine("global cpl_P11 = "+0+"");
+//			writer.appendLine("global cpl_P12 = "+0+"");
+//			writer.appendLine("global cpl_P13 = "+0+"");
+//			writer.appendLine("global cpl_P14 = "+0+"");
+//			writer.appendLine("global cpl_P15 = "+0+"");	
+//		}
+//		
+//		if(getstateP2R()=="READY") {
+//		writer.appendLine("global cpl_P20 = "+poses.get(12)+"");
+//		writer.appendLine("global cpl_P21 = "+poses.get(13)+"");
+//		writer.appendLine("global cpl_P22 = "+poses.get(14)+"");
+//		writer.appendLine("global cpl_P23 = "+poses.get(15)+"");
+//		writer.appendLine("global cpl_P24 = "+poses.get(16)+"");
+//		writer.appendLine("global cpl_P25 = "+poses.get(17)+"");
+////		//removeNodes();
+//		}else {
+//			writer.appendLine("global cpl_P20 = "+0+"");
+//			writer.appendLine("global cpl_P21 = "+0+"");
+//			writer.appendLine("global cpl_P22 = "+0+"");
+//			writer.appendLine("global cpl_P23 = "+0+"");
+//			writer.appendLine("global cpl_P24 = "+0+"");
+//			writer.appendLine("global cpl_P25 = "+0+"");
+//		}
+	}
+	
+	
+	private PickInstalationNodeContribution getInstallation() {
+		//return api.getApplicationAPI().getInstallationNode(PickInstalationNodeContribution.class);
+		return apiProvider.getProgramAPI().getInstallationNode(PickInstalationNodeContribution.class);
 	}
 
 	// select Pick Up point using RobotPositionCallback

@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1602768387259
+Bnd-LastModified: 1602850989923
 Build-Jdk: 1.8.0_265
 Built-By: ur
 Bundle-Activator: com.ur.urcap.examples.ellipseswing.Activator
@@ -19,8 +19,8 @@ Export-Package: com.ur.urcap.examples.ellipseswing;version="1.0.0.SNAPSH
  OT";uses:="com.ur.urcap.api.contribution,com.ur.urcap.api.contribution.
  installation,com.ur.urcap.api.contribution.installation.swing,com.ur.ur
  cap.api.contribution.program,com.ur.urcap.api.contribution.program.swin
- g,com.ur.urcap.api.domain.data,com.ur.urcap.api.domain.script,javax.swi
- ng,org.osgi.framework"
+ g,com.ur.urcap.api.domain.data,com.ur.urcap.api.domain.script,com.ur.ur
+ cap.api.domain.value,javax.swing,org.osgi.framework"
 Import-Package: com.ur.urcap.api.contribution;version="[1.8,2)",com.ur.u
  rcap.api.contribution.installation;version="[1.7,2)",com.ur.urcap.api.c
  ontribution.installation.swing;version="[1.7,2)",com.ur.urcap.api.contr
