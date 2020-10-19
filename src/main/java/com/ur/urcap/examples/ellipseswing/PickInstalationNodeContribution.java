@@ -19,9 +19,9 @@ public class PickInstalationNodeContribution implements InstallationNodeContribu
 	private final PickInstalationNodeViev view;
 	private final DataModel model;
 	
-	public int pickI ;
-	public int diamI ;
-	public int lengI ;
+	public int pickI=0 ;
+	public int diamI=0 ;
+	public int lengI=0 ;
 	public List<Pose> posesI = new ArrayList<Pose>();
 	
 	

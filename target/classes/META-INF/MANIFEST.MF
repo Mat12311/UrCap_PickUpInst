@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1603096147374
+Bnd-LastModified: 1603108723239
 Build-Jdk: 1.8.0_265
 Built-By: ur
 Bundle-Activator: com.ur.urcap.examples.ellipseswing.Activator
