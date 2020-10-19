@@ -46,6 +46,7 @@ import com.ur.urcap.api.domain.value.simple.Length;
 import com.ur.urcap.api.domain.value.simple.SimpleValueFactory;
 import com.ur.urcap.api.domain.value.simple.Speed;
 
+import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,7 +65,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	
 	//dataModel VAR
 	private static final String PICK_KEY = "pick";
-	private static final int DEFAULT_PICK = 0;
+	private static final int DEFAULT_PICK = 1;
 	private static final String LEN_KEY = "len";
 	private static final int DEFAULT_LEN = 0;
 	private static final String DIAM_KEY = "diam";
@@ -92,6 +93,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	public int p3;
 	public int n =0;
 	public int f =0;
+	public String text="";
 
 	private final ProgramAPIProvider apiProvider;
 	private final ProgramNodeFactory programNodeFactory;
@@ -422,6 +424,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 				case 1:
 					view.LP.setText("READY");
 					onPRstateChange("READY");
+					text="P";
 					p1=1;
 					if(n>0) {
 						p2=1;
@@ -433,6 +436,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 				case 2:
 					view.LP1.setText("READY");
 					onP1RstateChange("READY");
+					text="P1";
 					p2=1;
 					if(n>1) {
 						p3=1;
@@ -442,6 +446,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 				case 3:
 					view.LP2.setText("READY");
 					onP2RstateChange("READY");
+					text="P2";
 					//p3=1;
 					//p2=1;
 					//p1=1;
@@ -481,7 +486,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 				
 				
 				
-				createNodes();
+				createNodes(text);
 				configureMoveNode();
 				adjustWaypointsToCenterPoint(positionParameters);
 				
@@ -661,7 +666,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		return valueFactoryProvider.getPoseFactory().createPose(x, y, z, rx, ry, rz, unit, Angle.Unit.RAD);
 	}
 
-	private void createNodes() {
+	private void createNodes(String t) {
 		ProgramAPI programAPI = apiProvider.getProgramAPI();
 		ProgramModel programModel = programAPI.getProgramModel();
 		try {
@@ -671,7 +676,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 
 			waypointNodes.clear();
 			for (int i = 1; i <= NUMBER_OF_WAYPOINTS; i++) {
-				createAndAddWaypointNode(i);
+				createAndAddWaypointNode(i,t);
 			}
 		} catch (TreeStructureException e) {
 			e.printStackTrace();
@@ -705,27 +710,32 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	
 	}
 
-	private void createAndAddWaypointNode(int waypointNumber) throws TreeStructureException {
-		String waypointName = createWaypointName(waypointNumber);
+	private void createAndAddWaypointNode(int waypointNumber,String t ) throws TreeStructureException {
+		String waypointName = createWaypointName(waypointNumber,t);
 		WaypointNode waypointNode = programNodeFactory.createWaypointNode(waypointName);
 		moveTreeNode.addChild(waypointNode);
 		waypointNodes.add(waypointNode);
 	}
 
-	private static String createWaypointName(int waypointNumber) {
+	private static String createWaypointName(int waypointNumber,String t) {
+		
+		//String txt="";
+		//switch ()
+		
+		
 		switch (waypointNumber) {
 		case 1:
-			return "OverPart";
+			return t+"OverPart";
 		case 2:
-			return "PickPart";
+			return t+"PickPart";
 		case 3:
-			return "OverPickPart";
+			return t+"OverPickPart";
 		case 4:
-			return "TransitPoint1";
+			return t+"TransitPoint1";
 		case 5:
-			return "TransitPoint2";
+			return t+"TransitPoint2";
 		case 6:
-			return "LeavingFeeder";
+			return t+"LeavingFeeder";
 			
 
 		default:
