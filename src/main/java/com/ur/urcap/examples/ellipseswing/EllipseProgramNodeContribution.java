@@ -322,9 +322,9 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	@Override
 	public void generateScript(ScriptWriter writer) {
 		writer.writeChildren();
-		writer.appendLine("global cpl_Diam = "+getDiam()+"");
-		writer.appendLine("global cpl_Len = "+getLen()+"");
-		writer.appendLine("global cpl_Pick = "+getPick()+"");
+		//writer.appendLine("global cpl_Diam = "+getDiam()+"");
+		//writer.appendLine("global cpl_Len = "+getLen()+"");
+		//writer.appendLine("global cpl_Pick = "+getPick()+"");
 		//writer.appendLine("global P1 = "+dataModel.get(PICKUP_POSITION, 0)+"");
 		
 		//write pose to variable
@@ -557,7 +557,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 			configureWaypointNodes(positionParameters);
 			setDefined(true);
 		} catch (IllegalArgumentException e) {
-			updateError(new EllipseState("Could not create ellipse movement<br>Try a different center point."));
+			updateError(new EllipseState("Could not create PickUp movement<br>Try a different pick point."));
 			setDefined(false);
 			resetWaypointNodes();
 		}
