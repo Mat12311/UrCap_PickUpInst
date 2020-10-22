@@ -44,7 +44,7 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 	private JLabel Llen = new JLabel("Lenght:   ");
 	private JLabel Ldia = new JLabel("Diameter:");
 	
-	public JLabel pickLabel = new JLabel(" 1");
+	public JLabel pickLabel = new JLabel(" 0");
 	public JLabel lenLabel= new JLabel("0");
 	public JLabel diamLabel = new JLabel("0");
 	
@@ -191,6 +191,9 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 	public void setPickLabel(int value) {
 		pickLabel.setText(String.valueOf(value));
 	}
+	public void enableP(boolean isEnable) {
+		P.setEnabled(isEnable);
+	}
 
 	public void enableP1(boolean isEnabled) {
 		P1.setEnabled(isEnabled);
@@ -225,6 +228,10 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 			public void actionPerformed(ActionEvent e) {
 				int txt= Integer.parseInt(label.getText());
 				txt++;
+				if(txt==1) {provider.get().onPstateChange(true);
+				enableP(true);
+					
+				}
 				if(txt==2) { provider.get().onP1stateChange(true);
 						enableP1(true);
 				}
@@ -250,7 +257,10 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 			public void actionPerformed(ActionEvent e) {
 				int txt= Integer.parseInt(label.getText());
 				txt--;
-				if(txt<1) txt=1;
+				if(txt<0) txt=0;
+				if(txt<1) { provider.get().onPstateChange(false);
+				enableP(false);
+						}
 				if(txt<2) { provider.get().onP1stateChange(false);
 						enableP1(false);
 				}

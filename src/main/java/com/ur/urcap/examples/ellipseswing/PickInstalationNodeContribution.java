@@ -9,6 +9,11 @@ import com.ur.urcap.api.contribution.installation.InstallationAPIProvider;
 import com.ur.urcap.api.domain.data.DataModel;
 import com.ur.urcap.api.domain.script.ScriptWriter;
 import com.ur.urcap.api.domain.value.Pose;
+import com.ur.urcap.api.domain.value.PoseFactory;
+import com.ur.urcap.api.domain.value.Position;
+import com.ur.urcap.api.domain.value.Rotation;
+import com.ur.urcap.api.domain.value.simple.Force;
+import com.ur.urcap.api.domain.value.simple.Length.Unit;
 
 
 public class PickInstalationNodeContribution implements InstallationNodeContribution {
@@ -23,6 +28,8 @@ public class PickInstalationNodeContribution implements InstallationNodeContribu
 	public int diamI=0 ;
 	public int lengI=0 ;
 	public List<Pose> posesI = new ArrayList<Pose>();
+	
+
 	
 	
 	
@@ -55,7 +62,7 @@ public class PickInstalationNodeContribution implements InstallationNodeContribu
 		
 		
 		//write pose to variable
-		if(pickI>0) {
+		if(pickI>0 && posesI.get(0)!=null) {
 		writer.appendLine("global cpl_P0I = "+posesI.get(0)+"");
 		writer.appendLine("global cpl_P1I = "+posesI.get(1)+"");
 		writer.appendLine("global cpl_P2I = "+posesI.get(2)+"");
@@ -72,7 +79,7 @@ public class PickInstalationNodeContribution implements InstallationNodeContribu
 			
 		}
 		
-		if(pickI>1) {
+		if(pickI>1 && posesI.get(6)!=null) {
 		writer.appendLine("global cpl_P10I = "+posesI.get(6)+"");
 		writer.appendLine("global cpl_P11I = "+posesI.get(7)+"");
 		writer.appendLine("global cpl_P12I = "+posesI.get(8)+"");
@@ -89,7 +96,7 @@ public class PickInstalationNodeContribution implements InstallationNodeContribu
 			writer.appendLine("global cpl_P15I = "+0+"");	
 		}
 		
-		if(pickI>2) {
+		if(pickI>2&& posesI.get(12)!=null) {
 		writer.appendLine("global cpl_P20I = "+posesI.get(12)+"");
 		writer.appendLine("global cpl_P21I = "+posesI.get(13)+"");
 		writer.appendLine("global cpl_P22I = "+posesI.get(14)+"");

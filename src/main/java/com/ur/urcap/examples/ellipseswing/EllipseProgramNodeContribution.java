@@ -65,7 +65,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	
 	//dataModel VAR
 	private static final String PICK_KEY = "pick";
-	private static final int DEFAULT_PICK = 1;
+	private static final int DEFAULT_PICK = 0;
 	private static final String LEN_KEY = "len";
 	private static final int DEFAULT_LEN = 0;
 	private static final String DIAM_KEY = "diam";
@@ -282,6 +282,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	public void openView() {
 		view.updateError(this.ellipseState.getMessage(), this.ellipseState.isError());
 		
+		view.enableP(getstateP());
 		view.enableP1(getstateP1());
 		view.enableP2(getstateP2());
 		view.LP.setText(getstatePR());
