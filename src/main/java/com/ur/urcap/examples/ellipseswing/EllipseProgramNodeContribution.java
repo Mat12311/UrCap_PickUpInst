@@ -162,6 +162,9 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	}
 	
 	public void onDiamValueChange(final int val) {
+		
+		//test
+		if(getstatePR()=="READY") removeNodes();
 		undoRedoManager.recordChanges(new UndoableChanges() {
 			
 			@Override
@@ -312,17 +315,20 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 
 	@Override
 	public String getTitle() {
-		return "PickUp2";
+		return "PickUpSet";
 	}
 
 	@Override
 	public boolean isDefined() {
-		return dataModel.get(DEFINED_KEY, false);
+		//return dataModel.get(DEFINED_KEY, false);
+		return true;
+		
 	}
 
 	@Override
 	public void generateScript(ScriptWriter writer) {
 		writer.writeChildren();
+		System.out.println("Script from ProgramNode ");
 		//writer.appendLine("global cpl_Diam = "+getDiam()+"");
 		//writer.appendLine("global cpl_Len = "+getLen()+"");
 		//writer.appendLine("global cpl_Pick = "+getPick()+"");
@@ -433,6 +439,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 					}
 					n++;
 					//createNodes();
+					System.out.println("Pick P form onOkRobot");
 					break;
 				case 2:
 					view.LP1.setText("READY");
@@ -443,6 +450,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 						p3=1;
 					}
 					n++;
+					System.out.println("Pick P1 form onOkRobot");
 					break;
 				case 3:
 					view.LP2.setText("READY");
@@ -456,6 +464,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 					}
 					n++;
 					//removeNodes();
+					System.out.println("Pick P2 form onOkRobot");
 					break;
 
 				default:
@@ -487,9 +496,10 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 				
 				
 				
-				createNodes(text);
-				configureMoveNode();
-				adjustWaypointsToCenterPoint(positionParameters);
+				//createNodes(text);
+				//configureMoveNode();
+				 System.out.println("adjustWaypointsToPickPoint");
+				adjustWaypointsToPickPoint(positionParameters);
 				
 				
 				
@@ -540,7 +550,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		}
 	}
 
-	private void removeNodes() {
+	public void removeNodes() {
 		ProgramModel programModel = apiProvider.getProgramAPI().getProgramModel();
 		TreeNode rootTreeNode = programModel.getRootTreeNode(this);
 		try {
@@ -552,9 +562,10 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		}
 	}
 
-	private void adjustWaypointsToCenterPoint(PositionParameters positionParameters) {
+	private void adjustWaypointsToPickPoint(PositionParameters positionParameters) {
 		dataModel.set(PICKUP_POSITION, positionParameters.getPose());
 		try {
+			System.out.println("configureWaypoint");
 			configureWaypointNodes(positionParameters);
 			setDefined(true);
 		} catch (IllegalArgumentException e) {
@@ -583,12 +594,15 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	
 	
 
-
+		System.out.println("define pose fun ");
+		
 			int len = getLen();
 			int dia = getDiam();
 			int i =0;
 
-		for (WaypointNode waypointNode : waypointNodes) {
+		// test for (WaypointNode waypointNode : waypointNodes) 
+		for(int j =0 ; j<6; j++)
+		{
 		
 			
 			double offsetX = 0;
@@ -633,8 +647,9 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 			};
 
 			WaypointNodeConfig newWaypointNodeConfig = createWaypointConfig(positionParameters, offsetX, offsetY, offsetZ);
-			waypointNode.setConfig(newWaypointNodeConfig);
+			//waypointNode.setConfig(newWaypointNodeConfig);
 			i++;
+			 System.out.println("define pose " +i);
 		}
 	}
 
@@ -646,6 +661,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 				Length.Unit.MM);
 		
 		// add pose to List
+		System.out.println("add pose List");
 		poses.add(pose);
 		
 
@@ -677,7 +693,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 
 			waypointNodes.clear();
 			for (int i = 1; i <= NUMBER_OF_WAYPOINTS; i++) {
-				createAndAddWaypointNode(i,t);
+				//createAndAddWaypointNode(i,t);
 			}
 		} catch (TreeStructureException e) {
 			e.printStackTrace();

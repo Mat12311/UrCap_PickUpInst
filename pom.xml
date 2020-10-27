@@ -6,9 +6,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.ur.urcap.examples</groupId>
-	<artifactId>PickUp2</artifactId>
-	<version>1.0-SNAPSHOT</version>
-	<name>PickUp2</name>
+	<artifactId>PickUpSet</artifactId>
+	<version>1.0</version>
+	<name>PickUpSet</name>
 	<packaging>bundle</packaging>
 
 	<properties>
@@ -18,10 +18,10 @@
 		<!--         that comes along with your URCap                           -->
 		<!--********************************************************************-->
 		<!--******************* BEGINNING OF URCAP META DATA *******************-->
-		<urcap.symbolicname>com.ur.urcap.examples.ellipseswing</urcap.symbolicname>
-		<urcap.vendor>Universal Robots</urcap.vendor>
-		<urcap.contactAddress>Energivej 25, 5260 Odense S, Denmark</urcap.contactAddress>
-		<urcap.copyright>Copyright (C) 2009-${copyright.year} Universal Robots. All Rights Reserved</urcap.copyright>
+		<urcap.symbolicname>com.ur.urcap.pickupset</urcap.symbolicname>
+		<urcap.vendor>Cobot Planet</urcap.vendor>
+		<urcap.contactAddress>Tajęcina 103 36-002 Jasionka, Poland</urcap.contactAddress>
+		<urcap.copyright>Copyright (C) 2020-${copyright.year} Cobot Planet. All Rights Reserved</urcap.copyright>
 		<urcap.description>Pose using Move tab sample URCap</urcap.description>
 		<urcap.licenseType>Sample license</urcap.licenseType>
 		<!--********************** END OF URCAP META DATA **********************-->

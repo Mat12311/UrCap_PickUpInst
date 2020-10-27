@@ -25,6 +25,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.security.Provider;
 
 
 
@@ -37,6 +38,10 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 	private JButton P;
 	private JButton P1;
 	private JButton P2;
+	
+	private JButton Set = new JButton("Set") ;
+	private JButton Reset = new JButton("Reset");
+	
 	
 	public JLabel LP = new JLabel("");
 	public JLabel LP1 = new JLabel("");
@@ -77,6 +82,7 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 		panel.add(createLabelSlider(lenLabel, lenSlider, 0, 200, Llen, provider));
 		panel.add(createVerticalSpacing1(10));
 		panel.add(createLabelSlider(diamLabel, diamSlider, 0, 100, Ldia, provider));
+		panel.add(Set);
 		panel.add(createVerticalSpacing1(10));
 		
 		
@@ -85,6 +91,9 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 		panel.add(createVerticalSpacing());
 		panel.add(createLabelButton(pickLabel, provider));
 		panel.add(createDescrption("Pick Up Point Set"));
+		
+		
+		
 		
 		// create Button P 
 		final Box buttonSection = createSection(BoxLayout.LINE_AXIS);
@@ -151,6 +160,7 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 		buttonSection2.add(LP2);
 		panel.add(buttonSection2);
 		panel.add(createVerticalSpacing());
+		panel.add(Reset);
 		
 		text.setBackground(Color.RED);
 		
@@ -324,6 +334,11 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 				if(label1==lenLabel) provider.get().onLenValueChange(newValue);
 				if(label1==diamLabel) provider.get().onDiamValueChange(newValue);
 				label1.setText(String.valueOf(newValue));
+				// clear Viev if diam or lew change
+//				if(LP.getText()=="READY") {
+//					clerViev(provider);
+//				}
+				System.out.println("change detal parametr " +newValue);
 				
 				
 			}
@@ -395,6 +410,28 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 		panel.setAlignmentX(Component.LEFT_ALIGNMENT);
 		panel.setAlignmentY(Component.TOP_ALIGNMENT);
 		return panel;
+	}
+	
+	// clear view  test 
+	
+	public void clerViev(final ContributionProvider<EllipseProgramNodeContribution> provider) {
+		
+		provider.get().removeNodes();
+		
+		setPickLabel(0);
+		provider.get().onPickValueChange(0);
+		enableP(false);
+		enableP1(false);
+		enableP2(false);
+		provider.get().onPRstateChange("");
+		provider.get().onP1RstateChange("");
+		provider.get().onP2RstateChange("");
+		LP.setText("");
+		LP1.setText("");
+		LP2.setText("");
+		
+		
+		
 	}
 
 

@@ -20,7 +20,7 @@ public class PickInstalationNodeService implements SwingInstallationNodeService<
 	@Override
 	public String getTitle(Locale locale) {
 		
-		return "PickUp2";
+		return "PickUpSet";
 	}
 
 	@Override

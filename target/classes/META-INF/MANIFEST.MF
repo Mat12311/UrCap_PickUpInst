@@ -1,26 +1,26 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1603718710820
+Bnd-LastModified: 1603804091191
 Build-Jdk: 1.8.0_265
 Built-By: ur
 Bundle-Activator: com.ur.urcap.examples.ellipseswing.Activator
 Bundle-Category: URCap
-Bundle-ContactAddress: Energivej 25, 5260 Odense S, Denmark
-Bundle-Copyright: Copyright (C) 2009-2020 Universal Robots. All Rights R
- eserved
+Bundle-ContactAddress: Tajęcina 103 36-002 Jasionka, Poland
+Bundle-Copyright: Copyright (C) 2020-2020 Cobot Planet. All Rights Reser
+ ved
 Bundle-Description: Pose using Move tab sample URCap
 Bundle-LicenseType: Sample license
 Bundle-ManifestVersion: 2
-Bundle-Name: PickUp2
-Bundle-SymbolicName: com.ur.urcap.examples.PickUp2
-Bundle-Vendor: Universal Robots
-Bundle-Version: 1.0.0.SNAPSHOT
+Bundle-Name: PickUpSet
+Bundle-SymbolicName: com.ur.urcap.examples.PickUpSet
+Bundle-Vendor: Cobot Planet
+Bundle-Version: 1.0.0
 Created-By: Apache Maven Bundle Plugin
-Export-Package: com.ur.urcap.examples.ellipseswing;version="1.0.0.SNAPSH
- OT";uses:="com.ur.urcap.api.contribution,com.ur.urcap.api.contribution.
- installation,com.ur.urcap.api.contribution.installation.swing,com.ur.ur
- cap.api.contribution.program,com.ur.urcap.api.contribution.program.swin
- g,com.ur.urcap.api.domain.data,com.ur.urcap.api.domain.script,com.ur.ur
- cap.api.domain.value,javax.swing,org.osgi.framework"
+Export-Package: com.ur.urcap.examples.ellipseswing;version="1.0.0";uses:
+ ="com.ur.urcap.api.contribution,com.ur.urcap.api.contribution.installat
+ ion,com.ur.urcap.api.contribution.installation.swing,com.ur.urcap.api.c
+ ontribution.program,com.ur.urcap.api.contribution.program.swing,com.ur.
+ urcap.api.domain.data,com.ur.urcap.api.domain.script,com.ur.urcap.api.d
+ omain.value,javax.swing,org.osgi.framework"
 Import-Package: com.ur.urcap.api.contribution;version="[1.8,2)",com.ur.u
  rcap.api.contribution.installation;version="[1.7,2)",com.ur.urcap.api.c
  ontribution.installation.swing;version="[1.7,2)",com.ur.urcap.api.contr

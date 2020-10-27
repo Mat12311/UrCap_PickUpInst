@@ -67,6 +67,7 @@ public class PickInstalationNodeContribution implements InstallationNodeContribu
 		
 		//write pose to variable
 		if(pickI>0 && !posesI.isEmpty()) {
+			System.out.println("write pose for P ");
 		writer.appendLine("global cpl_P0I = "+posesI.get(0)+"");
 		writer.appendLine("global cpl_P1I = "+posesI.get(1)+"");
 		writer.appendLine("global cpl_P2I = "+posesI.get(2)+"");
@@ -84,6 +85,7 @@ public class PickInstalationNodeContribution implements InstallationNodeContribu
 		}
 		
 		if(pickI>1 && posesI.get(6)!=null) {
+			System.out.println("write pose for P1 ");
 		writer.appendLine("global cpl_P10I = "+posesI.get(6)+"");
 		writer.appendLine("global cpl_P11I = "+posesI.get(7)+"");
 		writer.appendLine("global cpl_P12I = "+posesI.get(8)+"");
@@ -101,6 +103,7 @@ public class PickInstalationNodeContribution implements InstallationNodeContribu
 		}
 		
 		if(pickI>2&& posesI.get(12)!=null) {
+			System.out.println("write pose for P2 ");
 		writer.appendLine("global cpl_P20I = "+posesI.get(12)+"");
 		writer.appendLine("global cpl_P21I = "+posesI.get(13)+"");
 		writer.appendLine("global cpl_P22I = "+posesI.get(14)+"");
@@ -120,6 +123,11 @@ public class PickInstalationNodeContribution implements InstallationNodeContribu
 	}
 	
 	public void checkInstal(int a, int b, int c, List p) {
+		
+		System.out.println("CheckInstal pick"+a);
+		System.out.println("CheckInstal diam"+b);
+		System.out.println("CheckInstal leng"+c);
+		System.out.println("CheckInstal List pose:"+p);
 		pickI=a;
 		diamI=b;
 		lengI=c;

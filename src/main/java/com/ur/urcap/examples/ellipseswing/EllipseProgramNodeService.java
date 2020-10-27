@@ -16,14 +16,14 @@ public class EllipseProgramNodeService
 
 	@Override
 	public String getId() {
-		return "PickUP2";
+		return "PickUpSet";
 	}
 
 	@Override
 	public void configureContribution(ContributionConfiguration configuration) {
 		// !!!!!!! temp chenged !!!!!!!!
 		//configuration.setDeprecated(false);
-		configuration.setChildrenAllowed(true);
+		//configuration.setChildrenAllowed(true);
 		//configuration.setUserInsertable(true);
 		
 		ProgramDebuggingSupport programDebuggingSupport = configuration.getProgramDebuggingSupport();
@@ -33,7 +33,7 @@ public class EllipseProgramNodeService
 
 	@Override
 	public String getTitle(Locale locale) {
-		return "PickUp2";
+		return "PickUpSet";
 	}
 
 	@Override
