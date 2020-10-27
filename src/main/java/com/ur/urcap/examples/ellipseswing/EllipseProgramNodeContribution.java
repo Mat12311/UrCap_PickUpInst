@@ -56,9 +56,9 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	private static final String DEFINED_KEY = "is_defined";
 	private static final String PICKUP_POSITION = "pickup_pose";
 
-	private static final double SHARED_TOOL_SPEED = 250;
-	private static final double SHARED_TOOL_ACCELERATION = 1200;
-	private static final double SHARED_BLEND_RADIUS_IN_MM = 23;
+	private static final double SHARED_TOOL_SPEED = 150;
+	private static final double SHARED_TOOL_ACCELERATION = 900;
+	private static final double SHARED_BLEND_RADIUS_IN_MM = 15;
 	private static final double HORIZONTAL_RADIUS_IN_MM = 200.0;
 	private static final double VERTICAL_RADIUS_IN_MM = 120.0;
 	private static final int NUMBER_OF_WAYPOINTS = 6;
@@ -695,7 +695,9 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		Length length = valueFactory.createLength(SHARED_BLEND_RADIUS_IN_MM, Length.Unit.MM);
 		Blend blend = valueFactoryProvider.getBlendFactory().createBlend(length);
 		FeatureModel featureModel = programAPI.getFeatureModel();
+		// select reference system
 		Feature feature = featureModel.getBaseFeature();
+		// select active TCP
 		TCPSelection tcpSelection = moveNode.getTCPSelectionFactory().createActiveTCPSelection();
 
 		MovePConfigBuilder movePConfigBuilder = moveNode.getConfigBuilders().createMovePConfigBuilder()

@@ -59,10 +59,14 @@ public class PickInstalationNodeContribution implements InstallationNodeContribu
 		writer.appendLine("global cpl_DiamI = "+diamI+"");
 		writer.appendLine("global cpl_LenI = "+lengI+"");
 		writer.appendLine("global cpl_PickI = "+pickI+"");
-		
+//		if(pickI==0 || posesI.isEmpty()) {
+//			posesI.add(0, null);
+//			posesI.add(6, null);
+//			posesI.add(12, null);
+//		}
 		
 		//write pose to variable
-		if(pickI>0 && posesI.get(0)!=null) {
+		if(pickI>0 && !posesI.isEmpty()) {
 		writer.appendLine("global cpl_P0I = "+posesI.get(0)+"");
 		writer.appendLine("global cpl_P1I = "+posesI.get(1)+"");
 		writer.appendLine("global cpl_P2I = "+posesI.get(2)+"");
@@ -119,8 +123,10 @@ public class PickInstalationNodeContribution implements InstallationNodeContribu
 		pickI=a;
 		diamI=b;
 		lengI=c;
-		posesI=p;
 		
+		posesI=p;
+		boolean l = posesI.isEmpty();
+		//if(l) posesI.add(0, null);
 	}
 	
 
