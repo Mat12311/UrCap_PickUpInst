@@ -54,6 +54,7 @@ import java.util.List;
 public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 
 	private static final String DEFINED_KEY = "is_defined";
+	private static final boolean DEFAULT_DEFINE = false;
 	private static final String PICKUP_POSITION = "pickup_pose";
 
 	private static final double SHARED_TOOL_SPEED = 150;
@@ -79,6 +80,8 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	private static final boolean DEFAULT_P1 = false;
 	private static final String P2_KEY ="P2";
 	private static final boolean DEFAULT_P2 = false;
+	private static final String PM_KEY="PM";
+	private static final boolean DEFAULT_PM = false;
 	// dataModel enable/disable label
 	private static final String P_R_KEY ="P_R";
 	private static final String DEFAULT_P_R = "";
@@ -103,7 +106,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	
 	// list with pose of moving point 
 	private final List<WaypointNode> waypointNodes = new ArrayList<WaypointNode>();
-	private final List<Pose> poses = new ArrayList<Pose>();
+	public final List<Pose> poses = new ArrayList<Pose>();
 	
 
 	private DataModel dataModel;
@@ -163,8 +166,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	
 	public void onDiamValueChange(final int val) {
 		
-		//test
-		if(getstatePR()=="READY") removeNodes();
+		
 		undoRedoManager.recordChanges(new UndoableChanges() {
 			
 			@Override
@@ -226,6 +228,39 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	private boolean getstateP2() {
 		return dataModel.get(P2_KEY,DEFAULT_P2);
 	}
+	
+	
+	public void onPMstateChange(final boolean val) {
+		undoRedoManager.recordChanges(new UndoableChanges() {
+			
+			@Override
+			public void executeChanges() {
+				dataModel.set(PM_KEY,val);
+				
+			}
+		});
+	}
+	
+	private boolean getstatePM() {
+		return dataModel.get(PM_KEY,DEFAULT_PM);
+	}
+	
+	// isDefine dataModel
+	public void onDefinestateChange(final boolean val) {
+		undoRedoManager.recordChanges(new UndoableChanges() {
+			
+			@Override
+			public void executeChanges() {
+				dataModel.set(DEFINED_KEY,val);
+				
+			}
+		});
+	}
+	
+	private boolean getstateDefine() {
+		return dataModel.get(DEFINED_KEY,DEFAULT_DEFINE);
+	}
+	
 	
 	
 	
@@ -291,6 +326,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		view.LP.setText(getstatePR());
 		view.LP1.setText(getstateP1R());
 		view.LP2.setText(getstateP2R());
+		view.enablePlusMinus(getstatePM());
 		view.text.setText("");
 
 		
@@ -321,7 +357,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	@Override
 	public boolean isDefined() {
 		//return dataModel.get(DEFINED_KEY, false);
-		return true;
+		return getstateDefine();
 		
 	}
 
@@ -329,6 +365,8 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	public void generateScript(ScriptWriter writer) {
 		writer.writeChildren();
 		System.out.println("Script from ProgramNode ");
+		getInstallation().checkInstal(getPick(), getDiam(), getLen(), poses);
+		
 		//writer.appendLine("global cpl_Diam = "+getDiam()+"");
 		//writer.appendLine("global cpl_Len = "+getLen()+"");
 		//writer.appendLine("global cpl_Pick = "+getPick()+"");
@@ -402,24 +440,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 				
 				
 
-//				
-//				if(p1==1 && p2==1 && p3==1 ) {
-//					removeNodes();
-//					
-//					
-//					view.LP.setText("");
-//					onPRstateChange("");
-//					view.LP1.setText("");
-//					onP1RstateChange("");
-//					view.LP2.setText("");
-//					onP2RstateChange("");
-//					
-//					p1=0;
-//					p2=0;
-//					p3=0;
-//					n=0;
-//					f=0;
-//				}
+
 				
 				if(getPick()==1 ) {
 					removeNodes();
@@ -663,6 +684,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		// add pose to List
 		System.out.println("add pose List");
 		poses.add(pose);
+		getInstallation().checkInstal(getPick(), getDiam(), getLen(), poses);
 		
 
 		return waypointNodeConfigFactory.createFixedPositionConfig(pose, positionParameters.getJointPositions(), positionParameters.getTCPOffset(),
@@ -683,94 +705,94 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		return valueFactoryProvider.getPoseFactory().createPose(x, y, z, rx, ry, rz, unit, Angle.Unit.RAD);
 	}
 
-	private void createNodes(String t) {
-		ProgramAPI programAPI = apiProvider.getProgramAPI();
-		ProgramModel programModel = programAPI.getProgramModel();
-		try {
-			moveNode = programNodeFactory.createMoveNodeNoTemplate();
-			TreeNode rootTreeNode = programModel.getRootTreeNode(this);
-			moveTreeNode = rootTreeNode.addChild(moveNode);
+//	private void createNodes(String t) {
+//		ProgramAPI programAPI = apiProvider.getProgramAPI();
+//		ProgramModel programModel = programAPI.getProgramModel();
+//		try {
+//			moveNode = programNodeFactory.createMoveNodeNoTemplate();
+//			TreeNode rootTreeNode = programModel.getRootTreeNode(this);
+//			moveTreeNode = rootTreeNode.addChild(moveNode);
+//
+//			waypointNodes.clear();
+//			for (int i = 1; i <= NUMBER_OF_WAYPOINTS; i++) {
+//				//createAndAddWaypointNode(i,t);
+//			}
+//		} catch (TreeStructureException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
-			waypointNodes.clear();
-			for (int i = 1; i <= NUMBER_OF_WAYPOINTS; i++) {
-				//createAndAddWaypointNode(i,t);
-			}
-		} catch (TreeStructureException e) {
-			e.printStackTrace();
-		}
-	}
+//	private void configureMoveNode() {
+//		ProgramAPI programAPI = apiProvider.getProgramAPI();
+//		ValueFactoryProvider valueFactoryProvider = programAPI.getValueFactoryProvider();
+//
+//		SimpleValueFactory valueFactory = valueFactoryProvider.getSimpleValueFactory();
+//
+//		Speed speed = valueFactory.createSpeed(SHARED_TOOL_SPEED, Speed.Unit.MM_S);
+//		Acceleration acceleration = valueFactory.createAcceleration(SHARED_TOOL_ACCELERATION, Acceleration.Unit.MM_S2);
+//		Length length = valueFactory.createLength(SHARED_BLEND_RADIUS_IN_MM, Length.Unit.MM);
+//		Blend blend = valueFactoryProvider.getBlendFactory().createBlend(length);
+//		FeatureModel featureModel = programAPI.getFeatureModel();
+//		// select reference system
+//		Feature feature = featureModel.getBaseFeature();
+//		// select active TCP
+//		TCPSelection tcpSelection = moveNode.getTCPSelectionFactory().createActiveTCPSelection();
+//
+//		MovePConfigBuilder movePConfigBuilder = moveNode.getConfigBuilders().createMovePConfigBuilder()
+//				.setToolSpeed(speed, ErrorHandler.AUTO_CORRECT)
+//				.setToolAcceleration(acceleration, ErrorHandler.AUTO_CORRECT)
+//				.setBlend(blend, ErrorHandler.AUTO_CORRECT)
+//				.setFeature(feature)
+//				.setTCPSelection(tcpSelection);
+//				
+//
+//		moveNode.setConfig(movePConfigBuilder.build());
+//		
+//	
+//	}
 
-	private void configureMoveNode() {
-		ProgramAPI programAPI = apiProvider.getProgramAPI();
-		ValueFactoryProvider valueFactoryProvider = programAPI.getValueFactoryProvider();
+//	private void createAndAddWaypointNode(int waypointNumber,String t ) throws TreeStructureException {
+//		String waypointName = createWaypointName(waypointNumber,t);
+//		WaypointNode waypointNode = programNodeFactory.createWaypointNode(waypointName);
+//		moveTreeNode.addChild(waypointNode);
+//		waypointNodes.add(waypointNode);
+//	}
 
-		SimpleValueFactory valueFactory = valueFactoryProvider.getSimpleValueFactory();
+//	private static String createWaypointName(int waypointNumber,String t) {
+//		
+//		//String txt="";
+//		//switch ()
+//		
+//		
+//		switch (waypointNumber) {
+//		case 1:
+//			return t+"OverPart";
+//		case 2:
+//			return t+"PickPart";
+//		case 3:
+//			return t+"OverPickPart";
+//		case 4:
+//			return t+"TransitPoint1";
+//		case 5:
+//			return t+"TransitPoint2";
+//		case 6:
+//			return t+"LeavingFeeder";
+//			
+//
+//		default:
+//			return "PickUpPoints" + waypointNumber;
+//		}
+//		
+//	
+//	}
 
-		Speed speed = valueFactory.createSpeed(SHARED_TOOL_SPEED, Speed.Unit.MM_S);
-		Acceleration acceleration = valueFactory.createAcceleration(SHARED_TOOL_ACCELERATION, Acceleration.Unit.MM_S2);
-		Length length = valueFactory.createLength(SHARED_BLEND_RADIUS_IN_MM, Length.Unit.MM);
-		Blend blend = valueFactoryProvider.getBlendFactory().createBlend(length);
-		FeatureModel featureModel = programAPI.getFeatureModel();
-		// select reference system
-		Feature feature = featureModel.getBaseFeature();
-		// select active TCP
-		TCPSelection tcpSelection = moveNode.getTCPSelectionFactory().createActiveTCPSelection();
-
-		MovePConfigBuilder movePConfigBuilder = moveNode.getConfigBuilders().createMovePConfigBuilder()
-				.setToolSpeed(speed, ErrorHandler.AUTO_CORRECT)
-				.setToolAcceleration(acceleration, ErrorHandler.AUTO_CORRECT)
-				.setBlend(blend, ErrorHandler.AUTO_CORRECT)
-				.setFeature(feature)
-				.setTCPSelection(tcpSelection);
-				
-
-		moveNode.setConfig(movePConfigBuilder.build());
-		
-	
-	}
-
-	private void createAndAddWaypointNode(int waypointNumber,String t ) throws TreeStructureException {
-		String waypointName = createWaypointName(waypointNumber,t);
-		WaypointNode waypointNode = programNodeFactory.createWaypointNode(waypointName);
-		moveTreeNode.addChild(waypointNode);
-		waypointNodes.add(waypointNode);
-	}
-
-	private static String createWaypointName(int waypointNumber,String t) {
-		
-		//String txt="";
-		//switch ()
-		
-		
-		switch (waypointNumber) {
-		case 1:
-			return t+"OverPart";
-		case 2:
-			return t+"PickPart";
-		case 3:
-			return t+"OverPickPart";
-		case 4:
-			return t+"TransitPoint1";
-		case 5:
-			return t+"TransitPoint2";
-		case 6:
-			return t+"LeavingFeeder";
-			
-
-		default:
-			return "PickUpPoints" + waypointNumber;
-		}
-		
-	
-	}
-
-	private void lockTreeNodes() {
-		ProgramAPI programAPI = apiProvider.getProgramAPI();
-		ProgramModel programModel = programAPI.getProgramModel();
-		TreeNode thisTreeNode = programModel.getRootTreeNode(this);
-		thisTreeNode.setChildSequenceLocked(true);
-		moveTreeNode.setChildSequenceLocked(true);
-	}
+//	private void lockTreeNodes() {
+//		ProgramAPI programAPI = apiProvider.getProgramAPI();
+//		ProgramModel programModel = programAPI.getProgramModel();
+//		TreeNode thisTreeNode = programModel.getRootTreeNode(this);
+//		thisTreeNode.setChildSequenceLocked(true);
+//		moveTreeNode.setChildSequenceLocked(true);
+//	}
 
 	private void setDefined(boolean defined) {
 		dataModel.set(DEFINED_KEY, defined);

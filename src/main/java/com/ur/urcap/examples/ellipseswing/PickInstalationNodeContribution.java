@@ -56,6 +56,8 @@ public class PickInstalationNodeContribution implements InstallationNodeContribu
 
 	@Override
 	public void generateScript(ScriptWriter writer) {
+		
+		System.out.println("ScriptWriter InstalatonNode");
 		writer.appendLine("global cpl_DiamI = "+diamI+"");
 		writer.appendLine("global cpl_LenI = "+lengI+"");
 		writer.appendLine("global cpl_PickI = "+pickI+"");
@@ -127,7 +129,8 @@ public class PickInstalationNodeContribution implements InstallationNodeContribu
 		System.out.println("CheckInstal pick"+a);
 		System.out.println("CheckInstal diam"+b);
 		System.out.println("CheckInstal leng"+c);
-		System.out.println("CheckInstal List pose:"+p);
+		System.out.println("CheckInstal List pose size:"+p.size());
+		//System.out.println("CheckInstal List pose:"+p);
 		pickI=a;
 		diamI=b;
 		lengI=c;
