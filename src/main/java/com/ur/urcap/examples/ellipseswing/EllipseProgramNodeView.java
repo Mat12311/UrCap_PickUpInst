@@ -39,8 +39,8 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 	private JButton P1;
 	private JButton P2;
 	
-	private JButton Set = new JButton("Set") ;
-	private JButton Reset = new JButton("Reset");
+	private JButton Set ;
+	private JButton Reset;
 	
 	
 	public JLabel LP = new JLabel("");
@@ -82,8 +82,31 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 		panel.add(createLabelSlider(lenLabel, lenSlider, 0, 200, Llen, provider));
 		panel.add(createVerticalSpacing1(10));
 		panel.add(createLabelSlider(diamLabel, diamSlider, 0, 100, Ldia, provider));
-		panel.add(Set);
-		panel.add(createVerticalSpacing1(10));
+		//Set.setAlignmentX(Component.CENTER_ALIGNMENT);
+		//panel.add(createVerticalSpacing1(5));
+		//panel.add(createButtonSet(Set));
+		//panel.add(createVerticalSpacing1(10));
+		
+		// Create button SET
+//		final Box buttonSectionS = createSection(BoxLayout.LINE_AXIS);
+//		buttonSectionS.add(createHorizontalIndent());
+//		this.Set = createButton("SET");
+//		this.Set.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				
+//			lenSlider.setEnabled(false);
+//			diamSlider.setEnabled(false);
+//
+//			}
+//		});
+//		this.Set.setPreferredSize(new Dimension(90, 30));
+//		this.Set.setMinimumSize(new Dimension(60, 20));
+//		this.Set.setMaximumSize(new Dimension(100, 30));
+//		buttonSectionS.add(this.Set, FlowLayout.LEFT);
+//		panel.add(buttonSectionS);
+//		panel.add(createVerticalSpacing());
 		
 		
 		infoSection.add(createInfo(" Number of Pick Up points "));
@@ -160,9 +183,32 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 		buttonSection2.add(LP2);
 		panel.add(buttonSection2);
 		panel.add(createVerticalSpacing());
-		panel.add(Reset);
+		//panel.add(createButtonReset(Reset));
 		
-		text.setBackground(Color.RED);
+		// Create button Reset
+		
+		final Box buttonSectionR = createSection(BoxLayout.LINE_AXIS);
+		buttonSectionR.add(createHorizontalIndent());
+		this.Reset = createButton("RESET");
+		this.Reset.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			lenSlider.setEnabled(true);
+			diamSlider.setEnabled(true);
+
+			}
+		});
+		this.Reset.setPreferredSize(style.getButtonSize());
+		this.Reset.setMinimumSize(style.getButtonSize());
+		this.Reset.setMaximumSize(style.getButtonSize());
+		buttonSectionR.add(this.Reset, FlowLayout.LEFT);
+		
+		panel.add(buttonSectionR);
+		panel.add(createVerticalSpacing());
+		
+		//text.setBackground(Color.RED);
 		
 		panel.add(text);
 		
@@ -213,6 +259,31 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 		P2.setEnabled(isEnabled);
 	}
 	
+	
+	private Box createButtonSet(final JButton b) {
+		Box box = Box.createHorizontalBox();
+		box.setAlignmentX(Component.LEFT_ALIGNMENT);
+		
+		b.setPreferredSize(new Dimension(100,20));
+		b.setMinimumSize(b.getPreferredSize());
+		
+		
+		box.add(b);
+		return  box;
+	}
+	
+	private Box createButtonReset(final JButton b) {
+		Box box = Box.createHorizontalBox();
+		box.setAlignmentX(Component.LEFT_ALIGNMENT);
+		//box.setAlignmentX(Component.BOTTOM_ALIGNMENT);
+		
+		b.setPreferredSize(new Dimension(120,20));
+		b.setMinimumSize(b.getPreferredSize());
+		
+		
+		box.add(b);
+		return  box;
+	}
 	
 	private Box createLabelButton(final JLabel label, 
 			final ContributionProvider<EllipseProgramNodeContribution> provider) {
@@ -343,12 +414,17 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 				
 			}
 		});
+		
+		JButton set1= new JButton("SET");
 	
 		box.add(label);
 		box.add(label1);
 		box.add(lMin);
 		box.add(slider);
 		box.add(lMax);
+		
+		if(label.getText()=="Diameter:")box.add(set1);
+		
 		
 		return box;
 	}
