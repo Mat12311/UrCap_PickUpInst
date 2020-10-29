@@ -2,31 +2,18 @@ package com.ur.urcap.examples.ellipseswing;
 
 
 import com.ur.urcap.api.contribution.ProgramNodeContribution;
-import com.ur.urcap.api.contribution.ViewAPIProvider;
 import com.ur.urcap.api.contribution.program.ProgramAPIProvider;
-import com.ur.urcap.api.domain.ProgramAPI;
 import com.ur.urcap.api.domain.UserInterfaceAPI;
 import com.ur.urcap.api.domain.data.DataModel;
-import com.ur.urcap.api.domain.feature.Feature;
-import com.ur.urcap.api.domain.feature.FeatureModel;
+
 import com.ur.urcap.api.domain.program.ProgramModel;
 import com.ur.urcap.api.domain.program.nodes.ProgramNodeFactory;
-import com.ur.urcap.api.domain.program.nodes.builtin.MoveNode;
 import com.ur.urcap.api.domain.program.nodes.builtin.WaypointNode;
-import com.ur.urcap.api.domain.program.nodes.builtin.configurations.movenode.MoveJMoveNodeConfig;
-import com.ur.urcap.api.domain.program.nodes.builtin.configurations.movenode.MoveNodeConfig;
-import com.ur.urcap.api.domain.program.nodes.builtin.configurations.movenode.MoveNodeConfigFactory;
-import com.ur.urcap.api.domain.program.nodes.builtin.configurations.movenode.TCPSelection;
-import com.ur.urcap.api.domain.program.nodes.builtin.configurations.movenode.TCPSelectionFactory;
-import com.ur.urcap.api.domain.program.nodes.builtin.configurations.movenode.builder.MoveJConfigBuilder;
-import com.ur.urcap.api.domain.program.nodes.builtin.configurations.movenode.builder.MoveNodeConfigBuilders;
-import com.ur.urcap.api.domain.program.nodes.builtin.configurations.movenode.builder.MovePConfigBuilder;
 import com.ur.urcap.api.domain.program.nodes.builtin.configurations.waypointnode.BlendParameters;
 import com.ur.urcap.api.domain.program.nodes.builtin.configurations.waypointnode.WaypointMotionParameters;
 import com.ur.urcap.api.domain.program.nodes.builtin.configurations.waypointnode.WaypointNodeConfig;
 import com.ur.urcap.api.domain.program.nodes.builtin.configurations.waypointnode.WaypointNodeConfigFactory;
 import com.ur.urcap.api.domain.program.structure.TreeNode;
-import com.ur.urcap.api.domain.program.structure.TreeStructureException;
 import com.ur.urcap.api.domain.script.ScriptWriter;
 import com.ur.urcap.api.domain.undoredo.UndoRedoManager;
 import com.ur.urcap.api.domain.undoredo.UndoableChanges;
@@ -35,18 +22,12 @@ import com.ur.urcap.api.domain.userinteraction.robot.movement.MovementCompleteEv
 import com.ur.urcap.api.domain.userinteraction.robot.movement.MovementErrorEvent;
 import com.ur.urcap.api.domain.userinteraction.robot.movement.RobotMovement;
 import com.ur.urcap.api.domain.userinteraction.robot.movement.RobotMovementCallback;
-import com.ur.urcap.api.domain.validation.ErrorHandler;
 import com.ur.urcap.api.domain.value.Pose;
 import com.ur.urcap.api.domain.value.ValueFactoryProvider;
-import com.ur.urcap.api.domain.value.blend.Blend;
 import com.ur.urcap.api.domain.value.robotposition.PositionParameters;
-import com.ur.urcap.api.domain.value.simple.Acceleration;
 import com.ur.urcap.api.domain.value.simple.Angle;
 import com.ur.urcap.api.domain.value.simple.Length;
-import com.ur.urcap.api.domain.value.simple.SimpleValueFactory;
-import com.ur.urcap.api.domain.value.simple.Speed;
 
-import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,14 +36,15 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 
 	private static final String DEFINED_KEY = "is_defined";
 	private static final boolean DEFAULT_DEFINE = false;
+	private static final String SET1_KEY = "Set1";
+	private static final boolean DEFAULT_SET1 = true;
+	private static final String SET2_KEY = "Set2";
+	private static final boolean DEFAULT_SET2 = false;
+	
+	
 	private static final String PICKUP_POSITION = "pickup_pose";
 
-	private static final double SHARED_TOOL_SPEED = 150;
-	private static final double SHARED_TOOL_ACCELERATION = 900;
-	private static final double SHARED_BLEND_RADIUS_IN_MM = 15;
-	private static final double HORIZONTAL_RADIUS_IN_MM = 200.0;
-	private static final double VERTICAL_RADIUS_IN_MM = 120.0;
-	private static final int NUMBER_OF_WAYPOINTS = 6;
+
 	
 	//dataModel VAR
 	private static final String PICK_KEY = "pick";
@@ -102,7 +84,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	private final ProgramNodeFactory programNodeFactory;
 	private final UndoRedoManager undoRedoManager;
 
-	private MoveNode moveNode;
+	//private MoveNode moveNode;
 	
 	// list with pose of moving point 
 	private final List<WaypointNode> waypointNodes = new ArrayList<WaypointNode>();
@@ -110,7 +92,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	
 
 	private DataModel dataModel;
-	private TreeNode moveTreeNode;
+	//private TreeNode moveTreeNode;
 
 	private WaypointNodeConfigFactory waypointNodeConfigFactory;
 
@@ -245,6 +227,39 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		return dataModel.get(PM_KEY,DEFAULT_PM);
 	}
 	
+	
+	// Set Button state 
+	public void onSet1stateChange(final boolean val) {
+		undoRedoManager.recordChanges(new UndoableChanges() {
+			
+			@Override
+			public void executeChanges() {
+				dataModel.set(SET1_KEY,val);
+				
+			}
+		});
+	}
+	
+	private boolean getstateSet1() {
+		return dataModel.get(SET1_KEY,DEFAULT_SET1);
+	}
+	
+	
+	public void onSet2stateChange(final boolean val) {
+		undoRedoManager.recordChanges(new UndoableChanges() {
+			
+			@Override
+			public void executeChanges() {
+				dataModel.set(SET2_KEY,val);
+				
+			}
+		});
+	}
+	
+	private boolean getstateSet2() {
+		return dataModel.get(SET2_KEY,DEFAULT_SET2);
+	}
+	
 	// isDefine dataModel
 	public void onDefinestateChange(final boolean val) {
 		System.out.println("Hello from onDefineChange ProgramNode !!!!!!!!!!!!!!!!!!!!!");
@@ -329,6 +344,9 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		view.LP2.setText(getstateP2R());
 		view.enablePlusMinus(getstatePM());
 		view.text.setText("");
+		
+		view.enableSet1(getstateSet1());
+		view.enableSet2(getstateSet2());
 
 		
 		view.setLenLabel(getLen());
@@ -347,7 +365,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 
 	@Override
 	public void closeView() {
-		//removeNodes();
+
 	}
 
 	@Override
@@ -357,8 +375,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 
 	@Override
 	public boolean isDefined() {
-		//return dataModel.get(DEFINED_KEY, false);
-		//System.out.println("Hello from isDefine ProgramNode ");
+
 		return getstateDefine();
 		
 	}
@@ -420,7 +437,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	
 	
 	private PickInstalationNodeContribution getInstallation() {
-		//return api.getApplicationAPI().getInstallationNode(PickInstalationNodeContribution.class);
+
 		return apiProvider.getProgramAPI().getInstallationNode(PickInstalationNodeContribution.class);
 	}
 
@@ -443,12 +460,6 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 				
 
 
-//				
-//				if(getPick()==1 ) {
-//					removeNodes();
-//					n=0;
-//					
-//				}
 				
 				switch (l) {
 				case 1:
@@ -465,10 +476,14 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 					if(getPick()>1) {
 						view.enableP1(true);
 						onP1stateChange(true);
+						view.enableP(false);
+						onPstateChange(false);
 						//onDefinestateChange(false);
 					}else {
 						System.out.println("Define true P!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 						onDefinestateChange(true);
+						view.enableP(false);
+						onPstateChange(false);
 					}
 					System.out.println("Pick P form onOkRobot");
 					break;
@@ -485,6 +500,8 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 					if(getPick()>2) {
 						view.enableP2(true);
 						onP2stateChange(true);
+						view.enableP1(false);
+					    onP1stateChange(false);
 					}else
 					 {
 						System.out.println("Define true P1!!!!!!!!!!!!!!!!!!!!!!!!!");
@@ -505,6 +522,8 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 					if(getPick()==3) {
 						System.out.println("Define true P2!!!!!!!!!!!!!!!!!!!!!");
 						onDefinestateChange(true);
+						view.enableP2(false);
+						onP2stateChange(false);
 					}
 					n++;
 					//removeNodes();
