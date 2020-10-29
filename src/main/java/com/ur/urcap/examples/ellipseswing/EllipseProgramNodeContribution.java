@@ -247,6 +247,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	
 	// isDefine dataModel
 	public void onDefinestateChange(final boolean val) {
+		System.out.println("Hello from onDefineChange ProgramNode !!!!!!!!!!!!!!!!!!!!!");
 		undoRedoManager.recordChanges(new UndoableChanges() {
 			
 			@Override
@@ -357,6 +358,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	@Override
 	public boolean isDefined() {
 		//return dataModel.get(DEFINED_KEY, false);
+		//System.out.println("Hello from isDefine ProgramNode ");
 		return getstateDefine();
 		
 	}
@@ -441,12 +443,12 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 				
 
 
-				
-				if(getPick()==1 ) {
-					removeNodes();
-					n=0;
-					
-				}
+//				
+//				if(getPick()==1 ) {
+//					removeNodes();
+//					n=0;
+//					
+//				}
 				
 				switch (l) {
 				case 1:
@@ -460,6 +462,14 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 					}
 					n++;
 					//createNodes();
+					if(getPick()>1) {
+						view.enableP1(true);
+						onP1stateChange(true);
+						//onDefinestateChange(false);
+					}else {
+						System.out.println("Define true P!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+						onDefinestateChange(true);
+					}
 					System.out.println("Pick P form onOkRobot");
 					break;
 				case 2:
@@ -471,6 +481,15 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 						p3=1;
 					}
 					n++;
+					
+					if(getPick()>2) {
+						view.enableP2(true);
+						onP2stateChange(true);
+					}else
+					 {
+						System.out.println("Define true P1!!!!!!!!!!!!!!!!!!!!!!!!!");
+						onDefinestateChange(true);
+					}
 					System.out.println("Pick P1 form onOkRobot");
 					break;
 				case 3:
@@ -482,6 +501,10 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 					//p1=1;
 					if(n>2) {
 						p3=1;
+					}
+					if(getPick()==3) {
+						System.out.println("Define true P2!!!!!!!!!!!!!!!!!!!!!");
+						onDefinestateChange(true);
 					}
 					n++;
 					//removeNodes();
@@ -588,10 +611,10 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		try {
 			System.out.println("configureWaypoint");
 			configureWaypointNodes(positionParameters);
-			setDefined(true);
+			//setDefined(true);
 		} catch (IllegalArgumentException e) {
 			updateError(new EllipseState("Could not create PickUp movement<br>Try a different pick point."));
-			setDefined(false);
+			//setDefined(false);
 			resetWaypointNodes();
 		}
 		
@@ -794,9 +817,9 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 //		moveTreeNode.setChildSequenceLocked(true);
 //	}
 
-	private void setDefined(boolean defined) {
-		dataModel.set(DEFINED_KEY, defined);
-	}
+//	private void setDefined(boolean defined) {
+//		dataModel.set(DEFINED_KEY, defined);
+//	}
 
 	private static class EllipseState {
 		private final String message;

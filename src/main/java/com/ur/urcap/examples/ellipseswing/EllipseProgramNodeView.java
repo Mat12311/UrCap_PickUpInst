@@ -35,7 +35,7 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 	private final Style style;
 	private final Icon errorIcon;
 	
-	public boolean isDefine = false; 
+	//public boolean isDefine = false; 
 
 	private JButton P;
 	private JButton P1;
@@ -140,6 +140,7 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 				provider.get().selectPickUpPoint(labelNum);
 				enableP(false);
 				provider.get().onPstateChange(false);
+				//provider.get().onDefinestateChange(false);
 
 			}
 		});
@@ -229,7 +230,7 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 			
 			pickLabel.setText("0");
 			provider.get().onPickValueChange(0);
-			isDefine=false;
+			//isDefine=false;
 			provider.get().onDefinestateChange(false);
 			provider.get().poses.clear();
 
@@ -411,25 +412,25 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 			
 					int txt= Integer.parseInt(label.getText());
 				if(txt==0) {
-					text.setText("SET Number of points");
+					text.setText("Number of points cannot be 0");
 					return;
 				}
 				provider.get().onPMstateChange(false);
 				enablePlusMinus(false);
 				
-				isDefine=true;
-				provider.get().onDefinestateChange(true);
+//				isDefine=true;
+//				provider.get().onDefinestateChange(true);
 			
 				
 				if(txt>0) { provider.get().onPstateChange(true);
 				enableP(true);
 						}
-				if(txt>1) { provider.get().onP1stateChange(true);
-						enableP1(true);
-				}
-				if(txt>2) { provider.get().onP2stateChange(true);
-						enableP2(true);
-				}
+//				if(txt>1) { provider.get().onP1stateChange(true);
+//						enableP1(true);
+//				}
+//				if(txt>2) { provider.get().onP2stateChange(true);
+//						enableP2(true);
+				//}
 				
 				text.setText("");
 			}
@@ -581,25 +582,25 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 	
 	// clear view  test 
 	
-	public void clerViev(final ContributionProvider<EllipseProgramNodeContribution> provider) {
-		
-		provider.get().removeNodes();
-		
-		setPickLabel(0);
-		provider.get().onPickValueChange(0);
-		enableP(false);
-		enableP1(false);
-		enableP2(false);
-		provider.get().onPRstateChange("");
-		provider.get().onP1RstateChange("");
-		provider.get().onP2RstateChange("");
-		LP.setText("");
-		LP1.setText("");
-		LP2.setText("");
-		
-		
-		
-	}
+//	public void clerViev(final ContributionProvider<EllipseProgramNodeContribution> provider) {
+//		
+//		provider.get().removeNodes();
+//		
+//		setPickLabel(0);
+//		provider.get().onPickValueChange(0);
+//		enableP(false);
+//		enableP1(false);
+//		enableP2(false);
+//		provider.get().onPRstateChange("");
+//		provider.get().onP1RstateChange("");
+//		provider.get().onP2RstateChange("");
+//		LP.setText("");
+//		LP1.setText("");
+//		LP2.setText("");
+//		
+//		
+//		
+//	}
 
 
 }
