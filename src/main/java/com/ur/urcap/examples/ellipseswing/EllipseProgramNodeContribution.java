@@ -506,6 +506,8 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 					 {
 						System.out.println("Define true P1!!!!!!!!!!!!!!!!!!!!!!!!!");
 						onDefinestateChange(true);
+						view.enableP1(false);
+					    onP1stateChange(false);
 					}
 					System.out.println("Pick P1 form onOkRobot");
 					break;
