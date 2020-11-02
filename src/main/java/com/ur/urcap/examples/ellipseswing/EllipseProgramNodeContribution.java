@@ -8,7 +8,6 @@ import com.ur.urcap.api.domain.data.DataModel;
 
 import com.ur.urcap.api.domain.program.ProgramModel;
 import com.ur.urcap.api.domain.program.nodes.ProgramNodeFactory;
-import com.ur.urcap.api.domain.program.nodes.builtin.WaypointNode;
 import com.ur.urcap.api.domain.program.nodes.builtin.configurations.waypointnode.BlendParameters;
 import com.ur.urcap.api.domain.program.nodes.builtin.configurations.waypointnode.WaypointMotionParameters;
 import com.ur.urcap.api.domain.program.nodes.builtin.configurations.waypointnode.WaypointNodeConfig;
@@ -55,7 +54,6 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	private static final int DEFAULT_DIAM = 0;
 	
 	// dataModel enable/disable  button
-	
 	private static final String P_KEY ="P";
 	private static final boolean DEFAULT_P = false;
 	private static final String P1_KEY ="P1";
@@ -64,6 +62,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	private static final boolean DEFAULT_P2 = false;
 	private static final String PM_KEY="PM";
 	private static final boolean DEFAULT_PM = false;
+	
 	// dataModel enable/disable label
 	private static final String P_R_KEY ="P_R";
 	private static final String DEFAULT_P_R = "";
@@ -84,15 +83,14 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	private final ProgramNodeFactory programNodeFactory;
 	private final UndoRedoManager undoRedoManager;
 
-	//private MoveNode moveNode;
+
 	
-	// list with pose of moving point 
-	private final List<WaypointNode> waypointNodes = new ArrayList<WaypointNode>();
+
 	public final List<Pose> poses = new ArrayList<Pose>();
 	
 
 	private DataModel dataModel;
-	//private TreeNode moveTreeNode;
+
 
 	private WaypointNodeConfigFactory waypointNodeConfigFactory;
 
@@ -339,9 +337,11 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		view.enableP(getstateP());
 		view.enableP1(getstateP1());
 		view.enableP2(getstateP2());
+		
 		view.LP.setText(getstatePR());
 		view.LP1.setText(getstateP1R());
 		view.LP2.setText(getstateP2R());
+		
 		view.enablePlusMinus(getstatePM());
 		view.text.setText("");
 		
@@ -386,7 +386,9 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		System.out.println("Script from ProgramNode ");
 		getInstallation().checkInstal(getPick(), getDiam(), getLen(), poses);
 		
-		//writer.appendLine("global cpl_Diam = "+getDiam()+"");
+		//writer.appendLine("globa testP = pose_trans("+poses.get(0)+",p["+getDiam()+","+getLen()+",0.0,0.0,0.0,0.0])");
+		
+		//writer.appendLine("global cpl_Diam ="+getDiam()+" ");
 		//writer.appendLine("global cpl_Len = "+getLen()+"");
 		//writer.appendLine("global cpl_Pick = "+getPick()+"");
 		//writer.appendLine("global P1 = "+dataModel.get(PICKUP_POSITION, 0)+"");
@@ -472,13 +474,13 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 						p3=1;
 					}
 					n++;
-					//createNodes();
+
 					if(getPick()>1) {
 						view.enableP1(true);
 						onP1stateChange(true);
 						view.enableP(false);
 						onPstateChange(false);
-						//onDefinestateChange(false);
+
 					}else {
 						System.out.println("Define true P!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 						onDefinestateChange(true);
@@ -515,9 +517,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 					view.LP2.setText("READY");
 					onP2RstateChange("READY");
 					text="P2";
-					//p3=1;
-					//p2=1;
-					//p1=1;
+
 					if(n>2) {
 						p3=1;
 					}
@@ -528,7 +528,6 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 						onP2stateChange(false);
 					}
 					n++;
-					//removeNodes();
 					System.out.println("Pick P2 form onOkRobot");
 					break;
 
@@ -538,10 +537,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 				
 
 				if(p1==1 && p2==1 && p3==1 ) {
-					removeNodes();
-					
-					//view.LP.setText("");
-					//onPRstateChange("");
+
 					view.LP.setText("");
 					onPRstateChange("");
 					view.LP1.setText("");
@@ -559,17 +555,9 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 					
 				}
 				
-				
-				
-				//createNodes(text);
-				//configureMoveNode();
 				 System.out.println("adjustWaypointsToPickPoint");
 				adjustWaypointsToPickPoint(positionParameters);
-				
-				
-				
-				//view.LP1.setText("READY");
-			
+
 				
 			}
 		});
@@ -636,22 +624,14 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		} catch (IllegalArgumentException e) {
 			updateError(new EllipseState("Could not create PickUp movement<br>Try a different pick point."));
 			//setDefined(false);
-			resetWaypointNodes();
+			//resetWaypointNodes();
 		}
 		
 		//lockTreeNodes();
 		//view.enableMoveButton(true);
 	}
 
-	private void resetWaypointNodes() {
-		BlendParameters blendParameters = waypointNodeConfigFactory.createSharedBlendParameters();
-		WaypointMotionParameters motionParameters = waypointNodeConfigFactory.createSharedMotionParameters();
-		for (WaypointNode waypointNode : waypointNodes) {
-			WaypointNodeConfig waypointNodeConfig = waypointNodeConfigFactory
-					.createFixedPositionConfig(blendParameters, motionParameters);
-			waypointNode.setConfig(waypointNodeConfig);
-		}
-	}
+
 
 	//calculate pose in Waypoints
 	
@@ -678,7 +658,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 			case 0:
 				 offsetX = 0;
 				 offsetY = 0;
-				 offsetZ = 1.5*len;
+				 offsetZ = 1.5*len/1000;
 				break;
 			case 1:
 				 offsetX = 0;
@@ -688,22 +668,22 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 			case 2:
 				 offsetX = 0;
 				 offsetY = 0;
-				 offsetZ = 0.15*len;
+				 offsetZ = 0.15*len/1000;
 				break;
 			case 3:
 				 offsetX = 0;
-				 offsetY = dia;
-				 offsetZ = 0.15*len;
+				 offsetY = dia/1000;
+				 offsetZ = 0.15*len/1000;
 				break;
 			case 4:
 				 offsetX = 0;
 				 offsetY = 0;
-				 offsetZ = 0.65*len;
+				 offsetZ = 0.65*len/1000;
 				break;
 			case 5:
 				 offsetX = 0;
-				 offsetY = -1.5*dia;
-				 offsetZ = 0.65*len;
+				 offsetY = -1.5*dia/1000;
+				 offsetZ = 0.65*len/1000;
 				break;
 
 
@@ -711,30 +691,42 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 				break;
 			};
 
-			WaypointNodeConfig newWaypointNodeConfig = createWaypointConfig(positionParameters, offsetX, offsetY, offsetZ);
-			//waypointNode.setConfig(newWaypointNodeConfig);
+			//WaypointNodeConfig newWaypointNodeConfig = createWaypointConfig(positionParameters, offsetX, offsetY, offsetZ,i);
+			createWaypointConfig(positionParameters, offsetX, offsetY, offsetZ,i);
 			i++;
 			 System.out.println("define pose " +i);
 		}
 	}
 
-	private WaypointNodeConfig createWaypointConfig(PositionParameters positionParameters, double xOffsetInMM,
-													double yOffsetInMM, double zOffsetInMM) {
+	private void createWaypointConfig(PositionParameters positionParameters, double xOffsetInMM,
+													double yOffsetInMM, double zOffsetInMM, int i) {
 		BlendParameters blendParameters = waypointNodeConfigFactory.createSharedBlendParameters();
 		WaypointMotionParameters motionParameters = waypointNodeConfigFactory.createSharedMotionParameters();
+		
+		
+		
+		if(i==1) {
 		Pose pose = createPoseUsingCenterPoseAndOffset(positionParameters.getPose(), xOffsetInMM, yOffsetInMM, zOffsetInMM,
 				Length.Unit.MM);
+		poses.add(pose);
+		}else {
+			Pose pose = createPoseUsingCenterPoseAndOffset1(positionParameters.getPose(), xOffsetInMM, yOffsetInMM, zOffsetInMM,
+					Length.Unit.MM);
+			poses.add(pose);
+			
+		}
+		
 		
 		// add pose to List
 		System.out.println("add pose List");
-		poses.add(pose);
+		
 		getInstallation().checkInstal(getPick(), getDiam(), getLen(), poses);
 		
 
-		return waypointNodeConfigFactory.createFixedPositionConfig(pose, positionParameters.getJointPositions(), positionParameters.getTCPOffset(),
-				blendParameters, motionParameters);
+	
 	}
 
+	// create pose after Robot coll pose 
 	private Pose createPoseUsingCenterPoseAndOffset(Pose pose, double xOffset, double yOffset, double zOffset,
 													Length.Unit unit) {
 		
@@ -746,101 +738,26 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		double ry = pose.getRotation().getRY(Angle.Unit.RAD);
 		double rz = pose.getRotation().getRZ(Angle.Unit.RAD);
 		ValueFactoryProvider valueFactoryProvider = apiProvider.getProgramAPI().getValueFactoryProvider();
+	
 		return valueFactoryProvider.getPoseFactory().createPose(x, y, z, rx, ry, rz, unit, Angle.Unit.RAD);
 	}
+	private Pose createPoseUsingCenterPoseAndOffset1(Pose pose, double xOffset, double yOffset, double zOffset,
+			Length.Unit unit) {
 
-//	private void createNodes(String t) {
-//		ProgramAPI programAPI = apiProvider.getProgramAPI();
-//		ProgramModel programModel = programAPI.getProgramModel();
-//		try {
-//			moveNode = programNodeFactory.createMoveNodeNoTemplate();
-//			TreeNode rootTreeNode = programModel.getRootTreeNode(this);
-//			moveTreeNode = rootTreeNode.addChild(moveNode);
-//
-//			waypointNodes.clear();
-//			for (int i = 1; i <= NUMBER_OF_WAYPOINTS; i++) {
-//				//createAndAddWaypointNode(i,t);
-//			}
-//		} catch (TreeStructureException e) {
-//			e.printStackTrace();
-//		}
-//	}
 
-//	private void configureMoveNode() {
-//		ProgramAPI programAPI = apiProvider.getProgramAPI();
-//		ValueFactoryProvider valueFactoryProvider = programAPI.getValueFactoryProvider();
-//
-//		SimpleValueFactory valueFactory = valueFactoryProvider.getSimpleValueFactory();
-//
-//		Speed speed = valueFactory.createSpeed(SHARED_TOOL_SPEED, Speed.Unit.MM_S);
-//		Acceleration acceleration = valueFactory.createAcceleration(SHARED_TOOL_ACCELERATION, Acceleration.Unit.MM_S2);
-//		Length length = valueFactory.createLength(SHARED_BLEND_RADIUS_IN_MM, Length.Unit.MM);
-//		Blend blend = valueFactoryProvider.getBlendFactory().createBlend(length);
-//		FeatureModel featureModel = programAPI.getFeatureModel();
-//		// select reference system
-//		Feature feature = featureModel.getBaseFeature();
-//		// select active TCP
-//		TCPSelection tcpSelection = moveNode.getTCPSelectionFactory().createActiveTCPSelection();
-//
-//		MovePConfigBuilder movePConfigBuilder = moveNode.getConfigBuilders().createMovePConfigBuilder()
-//				.setToolSpeed(speed, ErrorHandler.AUTO_CORRECT)
-//				.setToolAcceleration(acceleration, ErrorHandler.AUTO_CORRECT)
-//				.setBlend(blend, ErrorHandler.AUTO_CORRECT)
-//				.setFeature(feature)
-//				.setTCPSelection(tcpSelection);
-//				
-//
-//		moveNode.setConfig(movePConfigBuilder.build());
-//		
-//	
-//	}
+double x = pose.getPosition().getX(unit) + xOffset;
+double y = pose.getPosition().getY(unit) + yOffset;
+double z = pose.getPosition().getZ(unit) + zOffset;
+double rx = 0;
+double ry = 0;
+double rz = 0;
+ValueFactoryProvider valueFactoryProvider = apiProvider.getProgramAPI().getValueFactoryProvider();
 
-//	private void createAndAddWaypointNode(int waypointNumber,String t ) throws TreeStructureException {
-//		String waypointName = createWaypointName(waypointNumber,t);
-//		WaypointNode waypointNode = programNodeFactory.createWaypointNode(waypointName);
-//		moveTreeNode.addChild(waypointNode);
-//		waypointNodes.add(waypointNode);
-//	}
+return valueFactoryProvider.getPoseFactory().createPose(x, y, z, rx, ry, rz, unit, Angle.Unit.RAD);
+}
 
-//	private static String createWaypointName(int waypointNumber,String t) {
-//		
-//		//String txt="";
-//		//switch ()
-//		
-//		
-//		switch (waypointNumber) {
-//		case 1:
-//			return t+"OverPart";
-//		case 2:
-//			return t+"PickPart";
-//		case 3:
-//			return t+"OverPickPart";
-//		case 4:
-//			return t+"TransitPoint1";
-//		case 5:
-//			return t+"TransitPoint2";
-//		case 6:
-//			return t+"LeavingFeeder";
-//			
-//
-//		default:
-//			return "PickUpPoints" + waypointNumber;
-//		}
-//		
-//	
-//	}
 
-//	private void lockTreeNodes() {
-//		ProgramAPI programAPI = apiProvider.getProgramAPI();
-//		ProgramModel programModel = programAPI.getProgramModel();
-//		TreeNode thisTreeNode = programModel.getRootTreeNode(this);
-//		thisTreeNode.setChildSequenceLocked(true);
-//		moveTreeNode.setChildSequenceLocked(true);
-//	}
 
-//	private void setDefined(boolean defined) {
-//		dataModel.set(DEFINED_KEY, defined);
-//	}
 
 	private static class EllipseState {
 		private final String message;

@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1604042339275
+Bnd-LastModified: 1604313959112
 Build-Jdk: 1.8.0_272
 Built-By: ur
 Bundle-Activator: com.ur.urcap.examples.ellipseswing.Activator
@@ -36,8 +36,7 @@ Import-Package: com.ur.urcap.api.contribution;version="[1.8,2)",com.ur.u
  .ur.urcap.api.domain.undoredo;version="[1.7,2)",com.ur.urcap.api.domain
  .userinteraction;version="[1.8,2)",com.ur.urcap.api.domain.userinteract
  ion.robot.movement;version="[1.7,2)",com.ur.urcap.api.domain.value;vers
- ion="[1.8,2)",com.ur.urcap.api.domain.value.jointposition;version="[1.7
- ,2)",com.ur.urcap.api.domain.value.robotposition;version="[1.8,2)",com.
- ur.urcap.api.domain.value.simple;version="[1.8,2)",javax.imageio,javax.
- swing,javax.swing.event,org.osgi.framework;version="[1.6,2)"
+ ion="[1.8,2)",com.ur.urcap.api.domain.value.robotposition;version="[1.8
+ ,2)",com.ur.urcap.api.domain.value.simple;version="[1.8,2)",javax.image
+ io,javax.swing,javax.swing.event,org.osgi.framework;version="[1.6,2)"
 Tool: Bnd-2.1.0.20130426-122213

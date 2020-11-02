@@ -70,12 +70,35 @@ public class PickInstalationNodeContribution implements InstallationNodeContribu
 		//write pose to variable
 		if(pickI>0 && !posesI.isEmpty()) {
 			System.out.println("write pose for P ");
-		writer.appendLine("global cpl_P0I = "+posesI.get(0)+"");
-		writer.appendLine("global cpl_P1I = "+posesI.get(1)+"");
-		writer.appendLine("global cpl_P2I = "+posesI.get(2)+"");
-		writer.appendLine("global cpl_P3I = "+posesI.get(3)+"");
-		writer.appendLine("global cpl_P4I = "+posesI.get(4)+"");
-		writer.appendLine("global cpl_P5I = "+posesI.get(5)+"");
+			//Pose tcp = new Pose(posesI.get(0));
+			
+		//Pose offset =  new Pose (new double[] {0, 0, (1.5*lengI/1000), 0, 0, 0}); //(0,0,(1.5*lengI/1000), 0, 0, 0);
+		
+		
+		//Pose target = pose_trans(posesI.get(0), offset);
+			
+			//writer.assign("Test111", posesI.get(0).toString());
+			//writer.appendLine("global vart1=pose_trans("+posesI.get(1)+","+posesI.get(0)+")");
+			
+			writer.appendLine("global cpl_P0I = pose_trans("+posesI.get(1)+","+posesI.get(0)+")");
+			writer.appendLine("global cpl_P1I = "+posesI.get(1)+"");
+			writer.appendLine("global cpl_P2I = pose_trans("+posesI.get(1)+","+posesI.get(2)+")");
+			writer.appendLine("global cpl_P3I = pose_trans("+posesI.get(1)+","+posesI.get(3)+")");
+			writer.appendLine("global cpl_P4I = pose_trans("+posesI.get(1)+","+posesI.get(4)+")");
+			writer.appendLine("global cpl_P5I = pose_trans("+posesI.get(1)+","+posesI.get(5)+")");
+			
+			
+			
+			
+			
+				
+		
+//		writer.appendLine("global cpl_P0I = "+posesI.get(0)+"");
+//		writer.appendLine("global cpl_P1I = "+posesI.get(1)+"");
+//		writer.appendLine("global cpl_P2I = "+posesI.get(2)+"");
+//		writer.appendLine("global cpl_P3I = "+posesI.get(3)+"");
+//		writer.appendLine("global cpl_P4I = "+posesI.get(4)+"");
+//		writer.appendLine("global cpl_P5I = "+posesI.get(5)+"");
 		}else {
 			writer.appendLine("global cpl_P0I = "+0+"");
 			writer.appendLine("global cpl_P1I = "+0+"");
