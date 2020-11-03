@@ -23,9 +23,15 @@ import com.ur.urcap.api.domain.userinteraction.robot.movement.RobotMovement;
 import com.ur.urcap.api.domain.userinteraction.robot.movement.RobotMovementCallback;
 import com.ur.urcap.api.domain.value.Pose;
 import com.ur.urcap.api.domain.value.ValueFactoryProvider;
+import com.ur.urcap.api.domain.value.expression.Expression;
+import com.ur.urcap.api.domain.value.expression.ExpressionBuilder;
+import com.ur.urcap.api.domain.value.expression.InvalidExpressionException;
 import com.ur.urcap.api.domain.value.robotposition.PositionParameters;
 import com.ur.urcap.api.domain.value.simple.Angle;
 import com.ur.urcap.api.domain.value.simple.Length;
+import com.ur.urcap.api.domain.variable.GlobalVariable;
+import com.ur.urcap.api.domain.variable.VariableException;
+import com.ur.urcap.api.domain.variable.VariableFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -358,7 +364,22 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		
 		getInstallation().checkInstal(getPick(), getDiam(), getLen(), poses);
 		
-		
+		ExpressionBuilder expressionBuilder = apiProvider.getProgramAPI().getValueFactoryProvider().createExpressionBuilder();
+		Expression initialValue = null;
+		try {
+			initialValue = expressionBuilder.append("0").build();
+		} catch (InvalidExpressionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}     //.append("0").build();  //append("0").build();
+		VariableFactory variableFactory = apiProvider.getProgramAPI().getVariableModel().getVariableFactory();
+		try {
+			GlobalVariable variable = variableFactory.createGlobalVariable("myVarTest", initialValue);
+		} catch (VariableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//model.set(SELECTED_VAR, variable);
 	
 		
 	}
@@ -658,7 +679,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 			case 0:
 				 offsetX = 0;
 				 offsetY = 0;
-				 offsetZ = 1.5*len/1000;
+				 offsetZ = -1.5*len;
 				break;
 			case 1:
 				 offsetX = 0;
@@ -668,22 +689,22 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 			case 2:
 				 offsetX = 0;
 				 offsetY = 0;
-				 offsetZ = 0.15*len/1000;
+				 offsetZ = -0.15*len;
 				break;
 			case 3:
 				 offsetX = 0;
-				 offsetY = dia/1000;
-				 offsetZ = 0.15*len/1000;
+				 offsetY = dia;
+				 offsetZ = -0.15*len;
 				break;
 			case 4:
 				 offsetX = 0;
 				 offsetY = 0;
-				 offsetZ = 0.65*len/1000;
+				 offsetZ = -0.65*len;
 				break;
 			case 5:
 				 offsetX = 0;
-				 offsetY = -1.5*dia/1000;
-				 offsetZ = 0.65*len/1000;
+				 offsetY = 1.5*dia;
+				 offsetZ = -0.65*len;
 				break;
 
 
@@ -705,13 +726,14 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		
 		
 		
-		if(i==1) {
+		if(i==1 || i==7 || i==13) {
 		Pose pose = createPoseUsingCenterPoseAndOffset(positionParameters.getPose(), xOffsetInMM, yOffsetInMM, zOffsetInMM,
 				Length.Unit.MM);
 		poses.add(pose);
 		}else {
 			Pose pose = createPoseUsingCenterPoseAndOffset1(positionParameters.getPose(), xOffsetInMM, yOffsetInMM, zOffsetInMM,
 					Length.Unit.MM);
+			
 			poses.add(pose);
 			
 		}
@@ -737,6 +759,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		double rx = pose.getRotation().getRX(Angle.Unit.RAD);
 		double ry = pose.getRotation().getRY(Angle.Unit.RAD);
 		double rz = pose.getRotation().getRZ(Angle.Unit.RAD);
+		
 		ValueFactoryProvider valueFactoryProvider = apiProvider.getProgramAPI().getValueFactoryProvider();
 	
 		return valueFactoryProvider.getPoseFactory().createPose(x, y, z, rx, ry, rz, unit, Angle.Unit.RAD);
@@ -745,9 +768,9 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 			Length.Unit unit) {
 
 
-double x = pose.getPosition().getX(unit) + xOffset;
-double y = pose.getPosition().getY(unit) + yOffset;
-double z = pose.getPosition().getZ(unit) + zOffset;
+double x =  xOffset;
+double y =  yOffset;
+double z =  zOffset;
 double rx = 0;
 double ry = 0;
 double rz = 0;
