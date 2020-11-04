@@ -15,8 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
-
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -117,7 +115,7 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 				labelNum=1;
 				
 				provider.get().selectPickUpPoint(labelNum);
-;
+
 
 			}
 		});

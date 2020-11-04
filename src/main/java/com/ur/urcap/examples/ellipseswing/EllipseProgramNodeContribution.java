@@ -5,12 +5,8 @@ import com.ur.urcap.api.contribution.ProgramNodeContribution;
 import com.ur.urcap.api.contribution.program.ProgramAPIProvider;
 import com.ur.urcap.api.domain.UserInterfaceAPI;
 import com.ur.urcap.api.domain.data.DataModel;
-
 import com.ur.urcap.api.domain.program.ProgramModel;
 import com.ur.urcap.api.domain.program.nodes.ProgramNodeFactory;
-import com.ur.urcap.api.domain.program.nodes.builtin.configurations.waypointnode.BlendParameters;
-import com.ur.urcap.api.domain.program.nodes.builtin.configurations.waypointnode.WaypointMotionParameters;
-import com.ur.urcap.api.domain.program.nodes.builtin.configurations.waypointnode.WaypointNodeConfig;
 import com.ur.urcap.api.domain.program.nodes.builtin.configurations.waypointnode.WaypointNodeConfigFactory;
 import com.ur.urcap.api.domain.program.structure.TreeNode;
 import com.ur.urcap.api.domain.script.ScriptWriter;
@@ -371,7 +367,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		} catch (InvalidExpressionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}     //.append("0").build();  //append("0").build();
+		}   
 		VariableFactory variableFactory = apiProvider.getProgramAPI().getVariableModel().getVariableFactory();
 		try {
 			GlobalVariable variable = variableFactory.createGlobalVariable("myVarTest", initialValue);
@@ -379,7 +375,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//model.set(SELECTED_VAR, variable);
+	
 	
 		
 	}
@@ -641,15 +637,13 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		try {
 			System.out.println("configureWaypoint");
 			configureWaypointNodes(positionParameters);
-			//setDefined(true);
+
 		} catch (IllegalArgumentException e) {
 			updateError(new EllipseState("Could not create PickUp movement<br>Try a different pick point."));
-			//setDefined(false);
-			//resetWaypointNodes();
+
 		}
 		
-		//lockTreeNodes();
-		//view.enableMoveButton(true);
+		
 	}
 
 
@@ -666,7 +660,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 			int dia = getDiam();
 			int i =0;
 
-		// test for (WaypointNode waypointNode : waypointNodes) 
+ 
 		for(int j =0 ; j<6; j++)
 		{
 		
@@ -693,17 +687,17 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 				break;
 			case 3:
 				 offsetX = 0;
-				 offsetY = dia;
+				 offsetY = -dia;
 				 offsetZ = -0.15*len;
 				break;
 			case 4:
 				 offsetX = 0;
-				 offsetY = dia;
+				 offsetY = -dia;
 				 offsetZ = -0.65*len;
 				break;
 			case 5:
 				 offsetX = 0;
-				 offsetY = -1.5*dia;
+				 offsetY = 1.5*dia;
 				 offsetZ = -0.8*len;
 				break;
 
@@ -712,7 +706,6 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 				break;
 			};
 
-			//WaypointNodeConfig newWaypointNodeConfig = createWaypointConfig(positionParameters, offsetX, offsetY, offsetZ,i);
 			createWaypointConfig(positionParameters, offsetX, offsetY, offsetZ,i);
 			i++;
 			 System.out.println("define pose " +i);
@@ -721,9 +714,6 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 
 	private void createWaypointConfig(PositionParameters positionParameters, double xOffsetInMM,
 													double yOffsetInMM, double zOffsetInMM, int i) {
-		BlendParameters blendParameters = waypointNodeConfigFactory.createSharedBlendParameters();
-		WaypointMotionParameters motionParameters = waypointNodeConfigFactory.createSharedMotionParameters();
-		
 		
 		
 		if(i==1 || i==7 || i==13) {
@@ -768,16 +758,16 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 			Length.Unit unit) {
 
 
-double x =  xOffset;
-double y =  yOffset;
-double z =  zOffset;
-double rx = 0;
-double ry = 0;
-double rz = 0;
-ValueFactoryProvider valueFactoryProvider = apiProvider.getProgramAPI().getValueFactoryProvider();
+		double x =  xOffset;
+		double y =  yOffset;
+		double z =  zOffset;
+		double rx = 0;
+		double ry = 0;
+		double rz = 0;
+		ValueFactoryProvider valueFactoryProvider = apiProvider.getProgramAPI().getValueFactoryProvider();
 
-return valueFactoryProvider.getPoseFactory().createPose(x, y, z, rx, ry, rz, unit, Angle.Unit.RAD);
-}
+		return valueFactoryProvider.getPoseFactory().createPose(x, y, z, rx, ry, rz, unit, Angle.Unit.RAD);
+	}
 
 
 
