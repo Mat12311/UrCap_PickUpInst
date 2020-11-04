@@ -698,13 +698,13 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 				break;
 			case 4:
 				 offsetX = 0;
-				 offsetY = 0;
+				 offsetY = dia;
 				 offsetZ = -0.65*len;
 				break;
 			case 5:
 				 offsetX = 0;
-				 offsetY = 1.5*dia;
-				 offsetZ = -0.65*len;
+				 offsetY = -1.5*dia;
+				 offsetZ = -0.8*len;
 				break;
 
 

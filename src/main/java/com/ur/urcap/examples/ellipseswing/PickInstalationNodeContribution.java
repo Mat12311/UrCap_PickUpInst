@@ -173,7 +173,8 @@ public class PickInstalationNodeContribution implements InstallationNodeContribu
 			writer.appendLine("global cpl_P24I = "+0+"");
 			writer.appendLine("global cpl_P25I = "+0+"");
 		}
-		
+		//writer.assign("cpl_test", "cpl_P1I");
+		//writer.sleep(10);
 	}
 	
 	public void checkInstal(int a, int b, int c, List p) {
