@@ -3,7 +3,6 @@ package com.ur.urcap.examples.ellipseswing;
 
 import com.ur.urcap.api.contribution.ContributionProvider;
 import com.ur.urcap.api.contribution.program.swing.SwingProgramNodeView;
-
 import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -25,15 +24,10 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 
-
-
-
 public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgramNodeContribution> {
 
 	private final Style style;
 	private final Icon errorIcon;
-	
-	 
 
 	private JButton P;
 	private JButton P1;
@@ -42,9 +36,6 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 	private JButton Set1 = new JButton("SET") ;
 	private JButton Set2 = new JButton("SET");
 	private JButton Reset;
-	
-	
-	
 	
 	public JLabel LP = new JLabel("");
 	public JLabel LP1 = new JLabel("");
@@ -64,12 +55,9 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 	
 	private JLabel errorLabel;
 	
-
-	
 	public int labelNum =0;
 	public JLabel text = new JLabel("");
-
-
+	
 
 	public EllipseProgramNodeView(Style style) {
 		this.style = style;
@@ -225,12 +213,9 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 		panel.add(buttonSectionR);
 		panel.add(createVerticalSpacing());
 		
-
-		
+		text.setFont(text.getFont().deriveFont(Font.BOLD));
 		panel.add(text);
 		
-		
-
 		Box errorSection = createSection(BoxLayout.LINE_AXIS);
 		errorSection.add(createHorizontalIndent());
 		this.errorLabel = new JLabel();
@@ -450,7 +435,7 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 				enableSet2(true);
 				
 				text.setText("");
-;
+
 			}
 		});
 	

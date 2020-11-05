@@ -53,7 +53,6 @@ public class PickInstalationNodeContribution implements InstallationNodeContribu
 	@Override
 	public void generateScript(ScriptWriter writer) {
 		
-		// ExpressonBuilder expressionBuilder = api.getValueFactoryProvider().createExpressionBilder();
 		
 		System.out.println("ScriptWriter InstalatonNode");
 		writer.appendLine("global cpl_DiamI = "+diamI+"");
@@ -64,19 +63,6 @@ public class PickInstalationNodeContribution implements InstallationNodeContribu
 		if(pickI>0 && !posesI.isEmpty()) {
 			System.out.println("write pose for P ");
 			
-			//version 3 
-			//writer.appendLine(" global start_pos=get_forward_kin()");
-			
-			
-//			writer.appendLine("global cpl_P0I = pose_trans("+posesI.get(1)+","+posesI.get(0)+")");
-//			writer.appendLine("global cpl_P1I = "+posesI.get(1)+"");
-//			writer.appendLine("global cpl_P2I = pose_trans(start_pos,"+posesI.get(2)+")");
-//			writer.appendLine("global cpl_P3I = pose_trans(start_pos,"+posesI.get(3)+")");
-//			writer.appendLine("global cpl_P4I = pose_trans(start_pos,"+posesI.get(4)+")");
-//			writer.appendLine("global cpl_P5I = pose_trans(start_pos,"+posesI.get(5)+")");
-			
-			// version 2 
-			
 			writer.appendLine("global cpl_P0I = pose_trans("+posesI.get(1)+","+posesI.get(0)+")");
 			writer.appendLine("global cpl_P1I = "+posesI.get(1)+"");
 			writer.appendLine("global cpl_P2I = pose_trans("+posesI.get(1)+","+posesI.get(2)+")");
@@ -85,18 +71,6 @@ public class PickInstalationNodeContribution implements InstallationNodeContribu
 			writer.appendLine("global cpl_P5I = pose_trans("+posesI.get(1)+","+posesI.get(5)+")");
 			
 			
-			
-			
-			
-				// version 1 
-		
-//		writer.appendLine("global cpl_P0I = "+posesI.get(0)+"");
-//		writer.appendLine("global cpl_P1I = "+posesI.get(1)+"");
-//		writer.appendLine("global cpl_P2I = "+posesI.get(2)+"");
-//		writer.appendLine("global cpl_P3I = "+posesI.get(3)+"");
-//		writer.appendLine("global cpl_P4I = "+posesI.get(4)+"");
-//		writer.appendLine("global cpl_P5I = "+posesI.get(5)+"");
-		
 		}else {
 			writer.appendLine("global cpl_P0I = "+0+"");
 			writer.appendLine("global cpl_P1I = "+0+"");

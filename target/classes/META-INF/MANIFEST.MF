@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1604491503793
+Bnd-LastModified: 1604578109040
 Build-Jdk: 1.8.0_272
 Built-By: ur
 Bundle-Activator: com.ur.urcap.examples.ellipseswing.Activator
@@ -28,17 +28,12 @@ Import-Package: com.ur.urcap.api.contribution;version="[1.8,2)",com.ur.u
  .configuration.debugging;version="[1.7,2)",com.ur.urcap.api.contributio
  n.program.swing;version="[1.7,2)",com.ur.urcap.api.domain;version="[1.9
  ,2)",com.ur.urcap.api.domain.data;version="[1.9,2)",com.ur.urcap.api.do
- main.program;version="[1.8,2)",com.ur.urcap.api.domain.program.nodes;ve
- rsion="[1.8,2)",com.ur.urcap.api.domain.program.nodes.builtin;version="
- [1.9,2)",com.ur.urcap.api.domain.program.nodes.builtin.configurations.w
- aypointnode;version="[1.9,2)",com.ur.urcap.api.domain.program.structure
- ;version="[1.9,2)",com.ur.urcap.api.domain.script;version="[1.7,2)",com
- .ur.urcap.api.domain.undoredo;version="[1.7,2)",com.ur.urcap.api.domain
- .userinteraction;version="[1.8,2)",com.ur.urcap.api.domain.userinteract
- ion.robot.movement;version="[1.7,2)",com.ur.urcap.api.domain.value;vers
- ion="[1.8,2)",com.ur.urcap.api.domain.value.expression;version="[1.7,2)
- ",com.ur.urcap.api.domain.value.robotposition;version="[1.8,2)",com.ur.
- urcap.api.domain.value.simple;version="[1.8,2)",com.ur.urcap.api.domain
- .variable;version="[1.7,2)",javax.imageio,javax.swing,javax.swing.event
- ,org.osgi.framework;version="[1.6,2)"
+ main.script;version="[1.7,2)",com.ur.urcap.api.domain.undoredo;version=
+ "[1.7,2)",com.ur.urcap.api.domain.userinteraction;version="[1.8,2)",com
+ .ur.urcap.api.domain.userinteraction.robot.movement;version="[1.7,2)",c
+ om.ur.urcap.api.domain.value;version="[1.8,2)",com.ur.urcap.api.domain.
+ value.expression;version="[1.7,2)",com.ur.urcap.api.domain.value.robotp
+ osition;version="[1.8,2)",com.ur.urcap.api.domain.value.simple;version=
+ "[1.8,2)",com.ur.urcap.api.domain.variable;version="[1.7,2)",javax.imag
+ eio,javax.swing,javax.swing.event,org.osgi.framework;version="[1.6,2)"
 Tool: Bnd-2.1.0.20130426-122213
