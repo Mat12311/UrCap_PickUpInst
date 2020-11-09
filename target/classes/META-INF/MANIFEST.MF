@@ -1,18 +1,17 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1604578109040
+Bnd-LastModified: 1604912582577
 Build-Jdk: 1.8.0_272
 Built-By: ur
 Bundle-Activator: com.ur.urcap.examples.ellipseswing.Activator
 Bundle-Category: URCap
-Bundle-ContactAddress: Tajęcina 103 36-002 Jasionka, Poland
-Bundle-Copyright: Copyright (C) 2020-2020 Cobot Planet. All Rights Reser
- ved
-Bundle-Description: Pose using Move tab sample URCap
+Bundle-ContactAddress: suport@cobotplanet.com
+Bundle-Copyright: Copyright (C) 2020 Cobot Planet. All Rights Reserved
+Bundle-Description: defining the movement path to the Gravity feeder
 Bundle-LicenseType: Sample license
 Bundle-ManifestVersion: 2
 Bundle-Name: PickUpSet
-Bundle-SymbolicName: com.ur.urcap.examples.PickUpSet
-Bundle-Vendor: Cobot Planet
+Bundle-SymbolicName: com.cobotplanet.urcap.PickUpSet
+Bundle-Vendor: CobotPlanet sp. z o.o.
 Bundle-Version: 1.0.0
 Created-By: Apache Maven Bundle Plugin
 Export-Package: com.ur.urcap.examples.ellipseswing;version="1.0.0";uses:
@@ -34,6 +33,6 @@ Import-Package: com.ur.urcap.api.contribution;version="[1.8,2)",com.ur.u
  om.ur.urcap.api.domain.value;version="[1.8,2)",com.ur.urcap.api.domain.
  value.expression;version="[1.7,2)",com.ur.urcap.api.domain.value.robotp
  osition;version="[1.8,2)",com.ur.urcap.api.domain.value.simple;version=
- "[1.8,2)",com.ur.urcap.api.domain.variable;version="[1.7,2)",javax.imag
- eio,javax.swing,javax.swing.event,org.osgi.framework;version="[1.6,2)"
+ "[1.8,2)",com.ur.urcap.api.domain.variable;version="[1.7,2)",javax.swin
+ g,javax.swing.event,org.osgi.framework;version="[1.6,2)"
 Tool: Bnd-2.1.0.20130426-122213

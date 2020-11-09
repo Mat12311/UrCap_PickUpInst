@@ -1,7 +1,5 @@
 package com.ur.urcap.examples.ellipseswing;
 
-
-
 import java.util.ArrayList;
 import java.util.List;
 import com.ur.urcap.api.contribution.InstallationNodeContribution;
@@ -9,8 +7,6 @@ import com.ur.urcap.api.contribution.installation.InstallationAPIProvider;
 import com.ur.urcap.api.domain.data.DataModel;
 import com.ur.urcap.api.domain.script.ScriptWriter;
 import com.ur.urcap.api.domain.value.Pose;
-
-
 
 public class PickInstalationNodeContribution implements InstallationNodeContribution {
 	
@@ -24,13 +20,6 @@ public class PickInstalationNodeContribution implements InstallationNodeContribu
 	public int diamI=0 ;
 	public int lengI=0 ;
 	public List<Pose> posesI = new ArrayList<Pose>();
-	
-
-	
-	
-	
-	
-	
 	
 	public PickInstalationNodeContribution(InstallationAPIProvider apiProvider,
 			PickInstalationNodeViev view, DataModel model) {
@@ -58,7 +47,6 @@ public class PickInstalationNodeContribution implements InstallationNodeContribu
 		writer.appendLine("global cpl_DiamI = "+diamI+"");
 		writer.appendLine("global cpl_LenI = "+lengI+"");
 		writer.appendLine("global cpl_PickI = "+pickI+"");
-//	
 		//write pose to variable
 		if(pickI>0 && !posesI.isEmpty()) {
 			System.out.println("write pose for P ");

@@ -26,7 +26,6 @@ import com.ur.urcap.api.domain.variable.VariableFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 
 	private static final String DEFINED_KEY = "is_defined";
@@ -63,6 +62,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	private static final String DEFAULT_P1_R = "";
 	private static final String P2_R_KEY ="P2_R";
 	private static final String DEFAULT_P2_R = "";
+	
 	// var to implement  clearNode
 	public int p1; 
 	public int p2;
@@ -98,8 +98,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 			
 			@Override
 			public void executeChanges() {
-				dataModel.set(PICK_KEY,val);
-				
+				dataModel.set(PICK_KEY,val);		
 			}
 		});
 	}
@@ -302,9 +301,6 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		return dataModel.get(P2_R_KEY,DEFAULT_P2_R);
 	}
 	
-	
-	
-
 	@Override
 	public void openView() {
 		view.updateError(this.ellipseState.getMessage(), this.ellipseState.isError());
@@ -334,6 +330,8 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		
 		getInstallation().checkInstal(getPick(), getDiam(), getLen(), poses);
 		
+		// Variable Factory Builder
+		
 		ExpressionBuilder expressionBuilder = apiProvider.getProgramAPI().getValueFactoryProvider().createExpressionBuilder();
 		Expression initialValue = null;
 		try {
@@ -350,8 +348,6 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 			e.printStackTrace();
 		}
 	
-	
-		
 	}
 
 	@Override
@@ -377,7 +373,6 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		System.out.println("Script from ProgramNode ");
 		getInstallation().checkInstal(getPick(), getDiam(), getLen(), poses);
 		
-
 	}
 	
 	
@@ -547,7 +542,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 				break;
 			case 4:
 				 offsetX = 0;
-				 offsetY = -dia;
+				 offsetY = dia;
 				 offsetZ = -0.65*len;
 				break;
 			case 5:
@@ -576,18 +571,13 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		}else {
 			Pose pose = createPoseUsingCenterPoseAndOffset1(positionParameters.getPose(), xOffsetInMM, yOffsetInMM, zOffsetInMM,
 					Length.Unit.MM);
-			
-			poses.add(pose);
-			
+			// add pose to List
+			poses.add(pose);	
 		}
 		
-		
-		// add pose to List
 		System.out.println("add pose List");
 		
 		getInstallation().checkInstal(getPick(), getDiam(), getLen(), poses);
-		
-
 	
 	}
 
@@ -601,7 +591,6 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		double rx = pose.getRotation().getRX(Angle.Unit.RAD);
 		double ry = pose.getRotation().getRY(Angle.Unit.RAD);
 		double rz = pose.getRotation().getRZ(Angle.Unit.RAD);
-		
 		ValueFactoryProvider valueFactoryProvider = apiProvider.getProgramAPI().getValueFactoryProvider();
 	
 		return valueFactoryProvider.getPoseFactory().createPose(x, y, z, rx, ry, rz, unit, Angle.Unit.RAD);

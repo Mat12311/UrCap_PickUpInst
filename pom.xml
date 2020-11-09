@@ -5,7 +5,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.ur.urcap.examples</groupId>
+	<groupId>com.cobotplanet.urcap</groupId>
 	<artifactId>PickUpSet</artifactId>
 	<version>1.0</version>
 	<name>PickUpSet</name>
@@ -19,10 +19,10 @@
 		<!--********************************************************************-->
 		<!--******************* BEGINNING OF URCAP META DATA *******************-->
 		<urcap.symbolicname>com.ur.urcap.pickupset</urcap.symbolicname>
-		<urcap.vendor>Cobot Planet</urcap.vendor>
-		<urcap.contactAddress>Tajęcina 103 36-002 Jasionka, Poland</urcap.contactAddress>
-		<urcap.copyright>Copyright (C) 2020-${copyright.year} Cobot Planet. All Rights Reserved</urcap.copyright>
-		<urcap.description>Pose using Move tab sample URCap</urcap.description>
+		<urcap.vendor> CobotPlanet sp. z o.o.</urcap.vendor>
+		<urcap.contactAddress>suport@cobotplanet.com</urcap.contactAddress>
+		<urcap.copyright>Copyright (C) 2020 Cobot Planet. All Rights Reserved</urcap.copyright>
+		<urcap.description>defining the movement path to the Gravity feeder</urcap.description>
 		<urcap.licenseType>Sample license</urcap.licenseType>
 		<!--********************** END OF URCAP META DATA **********************-->
 		<!--********************************************************************-->
