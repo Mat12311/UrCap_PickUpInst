@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1604912582577
-Build-Jdk: 1.8.0_272
+Bnd-LastModified: 1607020675902
+Build-Jdk: 1.8.0_275
 Built-By: ur
 Bundle-Activator: com.ur.urcap.examples.ellipseswing.Activator
 Bundle-Category: URCap
@@ -27,12 +27,13 @@ Import-Package: com.ur.urcap.api.contribution;version="[1.8,2)",com.ur.u
  .configuration.debugging;version="[1.7,2)",com.ur.urcap.api.contributio
  n.program.swing;version="[1.7,2)",com.ur.urcap.api.domain;version="[1.9
  ,2)",com.ur.urcap.api.domain.data;version="[1.9,2)",com.ur.urcap.api.do
- main.script;version="[1.7,2)",com.ur.urcap.api.domain.undoredo;version=
- "[1.7,2)",com.ur.urcap.api.domain.userinteraction;version="[1.8,2)",com
- .ur.urcap.api.domain.userinteraction.robot.movement;version="[1.7,2)",c
- om.ur.urcap.api.domain.value;version="[1.8,2)",com.ur.urcap.api.domain.
- value.expression;version="[1.7,2)",com.ur.urcap.api.domain.value.robotp
- osition;version="[1.8,2)",com.ur.urcap.api.domain.value.simple;version=
- "[1.8,2)",com.ur.urcap.api.domain.variable;version="[1.7,2)",javax.swin
- g,javax.swing.event,org.osgi.framework;version="[1.6,2)"
+ main.robot;version="[1.8,2)",com.ur.urcap.api.domain.script;version="[1
+ .7,2)",com.ur.urcap.api.domain.undoredo;version="[1.7,2)",com.ur.urcap.
+ api.domain.userinteraction;version="[1.8,2)",com.ur.urcap.api.domain.us
+ erinteraction.robot.movement;version="[1.7,2)",com.ur.urcap.api.domain.
+ value;version="[1.8,2)",com.ur.urcap.api.domain.value.expression;versio
+ n="[1.7,2)",com.ur.urcap.api.domain.value.robotposition;version="[1.8,2
+ )",com.ur.urcap.api.domain.value.simple;version="[1.8,2)",com.ur.urcap.
+ api.domain.variable;version="[1.7,2)",javax.swing,javax.swing.event,org
+ .osgi.framework;version="[1.6,2)"
 Tool: Bnd-2.1.0.20130426-122213

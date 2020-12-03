@@ -70,6 +70,8 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 	
 	public int f =0;
 	public String text="";
+	private  String seria = "20195000394";
+	//private  String seria = "20195599999";
 
 	private final ProgramAPIProvider apiProvider;
 	private final UndoRedoManager undoRedoManager;
@@ -90,6 +92,13 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		this.undoRedoManager = this.apiProvider.getProgramAPI().getUndoRedoManager();
 
 		robotMovement = apiProvider.getUserInterfaceAPI().getUserInteraction().getRobotMovement();
+	}
+	
+	
+	public String getSeria() {
+		String seria = apiProvider.getSystemAPI().getRobotModel().getSerialNumber();
+		System.out.println("SERIA"+seria);
+		return seria;
 	}
 	
 	// set and get data from DataModel 
@@ -330,6 +339,14 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 		
 		getInstallation().checkInstal(getPick(), getDiam(), getLen(), poses);
 		
+		// check seril number
+		
+		if(0 !=getSeria().compareTo(seria)) {
+			view.disable();
+			
+		}
+		
+		
 		// Variable Factory Builder
 		
 		ExpressionBuilder expressionBuilder = apiProvider.getProgramAPI().getValueFactoryProvider().createExpressionBuilder();
@@ -512,6 +529,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 			int dia = getDiam();
 			int i =0;
 
+
 		for(int j =0 ; j<6; j++)
 		{
 		
@@ -524,6 +542,7 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 				 offsetX = 0;
 				 offsetY = 0;
 				 offsetZ = -1.5*len;
+				
 				break;
 			case 1:
 				 offsetX = 0;
@@ -533,22 +552,24 @@ public class EllipseProgramNodeContribution implements ProgramNodeContribution {
 			case 2:
 				 offsetX = 0;
 				 offsetY = 0;
-				 offsetZ = -0.15*len;
+				 offsetZ = -0.05*len;
+				 if(0.05*len <3) offsetZ = -3;
 				break;
 			case 3:
 				 offsetX = 0;
-				 offsetY = -dia;
-				 offsetZ = -0.15*len;
+				 offsetY = dia;
+				 offsetZ = -0.05*len;
+				 if(0.05*len <3) offsetZ = -3;
 				break;
 			case 4:
 				 offsetX = 0;
 				 offsetY = dia;
-				 offsetZ = -0.65*len;
+				 offsetZ = -0.55*len -3;
 				break;
 			case 5:
 				 offsetX = 0;
-				 offsetY = 1.5*dia;
-				 offsetZ = -0.8*len;
+				 offsetY = -1.5*dia;
+				 offsetZ = -0.55*len-3;
 				break;
 			default:
 				break;

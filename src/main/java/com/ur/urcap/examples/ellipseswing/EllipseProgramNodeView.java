@@ -22,6 +22,7 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 	private final Style style;
 	//private final Icon errorIcon;
 
+
 	private JButton P;
 	private JButton P1;
 	private JButton P2;
@@ -193,9 +194,44 @@ public class EllipseProgramNodeView implements SwingProgramNodeView<EllipseProgr
 		this.errorLabel = new JLabel();
 		errorSection.add(this.errorLabel);
 		panel.add(errorSection);
+		
+		
+//		if(!seraCheck(provider)) {
+//			
+//			provider.get().onSet1stateChange(false);
+//			enableSet1(false);
+//			provider.get().onSet2stateChange(false);
+//			enableSet2(false);
+//			text.setText("SERIA ERROR");
+//			
+//			
+//		}
+		
+			
+			
+		
 	}
 	
+	
+//	public boolean seraCheck(final ContributionProvider<EllipseProgramNodeContribution> provider) {
+//		
+//		if(0 == provider.get().getSeria().compareTo(seria))return true;
+//		return false;
+//	}
+	
 	// set data from dataModel
+	
+	public void disable() {
+		Reset.setEnabled(false);
+		diamSlider.setEnabled(false);
+		lenSlider.setEnabled(false);
+		Set1.setEnabled(false);
+		Set2.setEnabled(false);
+		text.setText("SERIA ERROR");
+		diamLabel.setText("E");
+		lenLabel.setText("E");
+		
+	}
 	
 	public void setLenLabel(int value) {
 		lenLabel.setText(String.valueOf(value));	
